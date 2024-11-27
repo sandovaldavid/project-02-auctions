@@ -8,8 +8,10 @@ from .forms import ListingForm
 from .models import User, Listing
 
 def index(request):
-    return render(request, "auctions/index.html")
-
+    list_user = Listing.objects.filter(active=True)
+    return render(request, "auctions/index.html", {
+        'listings': list_user
+    })
 
 def login_view(request):
     if request.method == "POST":
