@@ -2,6 +2,25 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-
-    TODO
+    <div class="d-flex align-items-center flex-column vh-100" >
+        {% for auction in listings %}
+            <div class="card w-50 shadow p-3 mb-5 bg-body-tertiary rounded" style="height: 30%">
+                <div class="row g-0">
+                    {% if auction.image %}
+                      <div class="col-md-4">
+                        <img src="{{ auction.image  }}" class="img-fluid rounded-start" alt="{{ auction.title }}_img">
+                      </div>
+                    {% endif %}
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">{{ auction.title }}</h5>
+                            <p> <span class="fs-6 fw-bold">Price:</span> ${{ auction.starting_bid }}</p>
+                            <p class="card-text">{{ auction.description }}</p>
+                            <p class="card-text"><small class="text-body-secondary">Created {{ auction.created }}</small></p>
+                      </div>
+                    </div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
