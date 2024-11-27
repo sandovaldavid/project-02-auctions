@@ -6,9 +6,9 @@ class User(AbstractUser):
     pass
 
 class Listing(models.Model):
-    title = models.CharField(max_length=64)
-    description = models.TextField()
-    starting_bid = models.DecimalField(max_digits=10, decimal_places=2)
+    title = models.CharField(max_length=64, blank=True)
+    description = models.TextField(blank=True)
+    starting_bid = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     image = models.URLField(blank=True)
     category = models.CharField(max_length=64, blank=True)
     created = models.DateTimeField(auto_now_add=True)
