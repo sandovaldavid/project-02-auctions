@@ -23,6 +23,11 @@
                                 <p><span class="fs-6 fw-bold">Price:</span> ${{ auction.starting_bid|floatformat:2 }}</p>
                                 <p class="card-text">{{ auction.description }}</p>
                                 <p class="card-text"><small class="text-body-secondary">Created {{ auction.created|date:"F j, Y" }}</small></p>
+                                {% if user == auction.winner %}
+                                    <div class="alert alert-success">
+                                        Congratulations! You won this auction with the highest bid.
+                                    </div>
+                                    {% endif %}
                                 {% if user.is_authenticated %}
                                     <a href="{% url 'listing' auction.id %}" class="btn btn-primary col-md-3">View</a>
                                 {% endif %}
