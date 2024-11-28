@@ -1,9 +1,6 @@
-from decimal import InvalidOperation, Decimal
-
 from django import forms
 from django.core.exceptions import ValidationError
-
-from .models import Listing, Bid
+from .models import Listing, Bid, Comment
 import re
 
 class ListingForm(forms.ModelForm):
@@ -59,3 +56,20 @@ class BidForm(forms.ModelForm):
         if bid_value <= 0:
             raise forms.ValidationError("The bid must be greater than 0.")
         return bid_value
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': 'Write your comment here...',
+                'maxlength': '500',
+                'style': 'resize: none;'
+            }),
+        }
+        labels = {
+            'text': 'Add a comment:',
+        }
