@@ -1,7 +1,9 @@
+from decimal import InvalidOperation, Decimal
+
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Listing
+from .models import Listing, Bid
 import re
 
 class ListingForm(forms.ModelForm):
@@ -43,3 +45,17 @@ class ListingForm(forms.ModelForm):
             if not re.match(url_pattern, url):
                 raise ValidationError("Invalid URL format.")
         return url
+
+class BidForm(forms.ModelForm):
+    class Meta:
+        model = Bid
+        fields = ['amount']
+
+    def clean_amount(self):
+        bid_value = self.cleaned_data.get("amount")
+        print(bid_value)
+        if bid_value is None:
+            raise forms.ValidationError("The bid value cannot be empty.")
+        if bid_value <= 0:
+            raise forms.ValidationError("The bid must be greater than 0.")
+        return bid_value
