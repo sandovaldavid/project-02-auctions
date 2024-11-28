@@ -1,0 +1,94 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+{{ listing.title }}
+{% endblock %}
+
+{% block body %}
+    <div class=" container pt-2 px-md-5">
+        <div class="row justify-content-center">
+            {% if listing.image %}
+                <div class="col">
+                    <form action="{% url 'watchlist' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="badge text-bg-secondary fs-5">Add to WatchList</button>
+                    </form>
+                    <h2 class="fw-bold fs-1">Listing: {{ listing.title }}</h2>
+                    <img src="{{ listing.image }}" alt="{{ listing.title }}_img">
+                    <p class="fs-5">{{ listing.description }}</p>
+                </div>
+                <div class="col">
+                    {% if listing.current_bid %}
+                    <p class="fw-bold fs-2">Current Price: ${{ listing.current_bid }}</p>
+                    {% else %}
+                    <p class="fw-bold fs-2">Current Price: ${{ listing.starting_bid }}</p>
+                    {% endif %}
+                    <h2 class="fs-2 fw-bold">Details</h2>
+                    <ul class="fs-5">
+                        <li>Category: {{ listing.category }}</li>
+                        <li>Created: {{ listing.created }}</li>
+                        <li>Owner: {{ listing.user }}</li>
+                    </ul>
+                    <div>
+                        <form action="{% url 'bid' listing.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group mt-3 mb-2">
+                                <label for="amount" class="fs-2 fw-bold">Bid ($)</label>
+                                <br>
+                                {% if message_success %}
+                                    <span class="text-success fw-bold">{{ message_success }}</span>
+                                {% endif %}
+                                <input type="number" class="form-control fs-4 " id="amount" name="amount" placeholder="$ 00.00" value="{{ form.cleaned_data.amount|default:'' }}">
+                                {% for error in form.amount.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                                {% if message %}
+                                    <span class="text-danger">{{ message }}</span>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-primary fs-5">Place Bid</button>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-md-6">
+                    <form action="{% url 'watchlist' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="badge text-bg-secondary fs-5">Add to WatchList</button>
+                    </form>
+                    <h2 class="fw-bold fs-1">Listing: {{ listing.title }}</h2>
+                    <p class="fs-5">{{ listing.description }}</p>
+                   {% if listing.current_bid %}
+                    <p class="fw-bold fs-2">Current Price: ${{ listing.current_bid }}</p>
+                    {% else %}
+                    <p class="fw-bold fs-2">Current Price: ${{ listing.starting_bid }}</p>
+                    {% endif %}
+                    <h2 class="fs-2 fw-bold">Details</h2>
+                    <ul class="fs-5">
+                        <li>Category: {{ listing.category }}</li>
+                        <li>Created: {{ listing.created }}</li>
+                        <li>Owner: {{ listing.user }}</li>
+                    </ul>
+                    <form action="{% url 'bid' listing.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group mt-3 mb-2">
+                            <label for="amount" class="fs-2 fw-bold">Bid ($)</label>
+                            <br>
+                            {% if message_success %}
+                                <span class="text-success fw-bold">{{ message_success }}</span>
+                            {% endif %}
+                            <input type="number" class="form-control fs-4 " id="amount" name="amount" placeholder="$ 00.00" value="{{ form.cleaned_data.amount|default:'' }}">
+                            {% for error in form.amount.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                            {% if message %}
+                                <span class="text-danger">{{ message }}</span>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-primary fs-5">Place Bid</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
