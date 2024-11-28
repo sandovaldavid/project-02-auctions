@@ -1,6 +1,7 @@
 from decimal import Decimal, InvalidOperation
 
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -122,8 +123,9 @@ def bid(request, listing_id):
 def watchlist(request, listing_id):
     user = request.user
     if request.method == 'POST':
-        listings_in_watchlist = Watchlist.objects.filter(user=user, listing__id=listing_id, active=True)
+        listings_in_watchlist = Watchlist.objects.filter(user=user, listing__id=listing_id)
         if listings_in_watchlist.exists():
+            listings_in_watchlist.update(active=True)
             return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
         else:
             current_listing = Listing.objects.get(pk=listing_id)
@@ -131,6 +133,9 @@ def watchlist(request, listing_id):
             return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
     else:
         listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True)
+        paginator = Paginator(listings_in_watchlist, 10)
+        page_number = request.GET.get('page')
+        page_listings = paginator.get_page(page_number)
         return render(request, 'auctions/watchList.html', {
-            'listings': listings_in_watchlist
+            'listings': page_listings
         })
