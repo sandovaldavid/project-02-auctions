@@ -1,15 +1,13 @@
-from decimal import Decimal, InvalidOperation
-
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .forms import ListingForm, BidForm
+from .forms import ListingForm, BidForm, CommentForm
 from .models import User, Listing, Bid, Watchlist
-
 
 def index(request):
     list_user = Listing.objects.filter(active=True)
@@ -86,9 +84,23 @@ def new_auctions(request):
     return render(request, "auctions/newAuctions.html", {'form': form})
 
 def listing(request, listing_id):
-    auction = Listing.objects.get(pk=listing_id)
+    auction = get_object_or_404(Listing, id=listing_id)
+    if request.method == "POST" and "comment" in request.POST:
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.listing = auction
+            comment.save()
+            messages.success(request, "Your comment has been added.")
+            return redirect('listing', listing_id=listing_id)
+    else:
+        form = CommentForm()
+    comments = auction.comments.all()
     return render(request, "auctions/auction.html", {
-        'listing': auction
+        'listing': auction,
+        'form': form,
+        'comments': comments
     })
 
 def bid(request, listing_id):
@@ -147,3 +159,24 @@ def watchlist_remove(request, listing_id):
     watchlist_item.active = False
     watchlist_item.save()
     return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
+
+def close_auction(request, listing_id):
+    listing = get_object_or_404(Listing, id=listing_id)
+
+    if request.user != listing.user:
+        messages.error(request, "You are not authorized to close this auction.")
+        return redirect('listing', listing_id=listing_id)
+
+    # Encuentra la oferta más alta
+    highest_bid = listing.bids.order_by('-amount').first()
+    if highest_bid:
+        listing.winner = highest_bid.user
+    else:
+        messages.warning(request, "No bids were placed on this listing.")
+
+    # Marca la subasta como inactiva
+    listing.active = False
+    listing.save()
+
+    messages.success(request, "The auction has been closed.")
+    return redirect('listing', listing_id=listing_id)
