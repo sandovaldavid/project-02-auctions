@@ -103,6 +103,7 @@ def listing(request, listing_id):
         'comments': comments
     })
 
+@login_required
 def bid(request, listing_id):
     auction = get_object_or_404(Listing, pk=listing_id)
     message = None

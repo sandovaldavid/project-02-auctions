@@ -17,9 +17,7 @@
                             <p> <span class="fs-6 fw-bold">Price:</span> ${{ auction.starting_bid }}</p>
                             <p class="card-text">{{ auction.description }}</p>
                             <p class="card-text"><small class="text-body-secondary">Created {{ auction.created }}</small></p>
-                            {% if user.is_authenticated %}
-                                <a href="{% url 'listing' auction.id %}" class="btn btn-primary col-md-3">View</a>
-                            {% endif %}
+                            <a href="{% url 'listing' auction.id %}" class="btn btn-primary col-md-3">View</a>
                         </div>
                     </div>
               </div>
