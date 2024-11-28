@@ -19,7 +19,8 @@
                     {% endif %}
                     <h2 class="fw-bold fs-1">Listing: {{ listing.title }}</h2>
                     <img src="{{ listing.image }}" alt="{{ listing.title }}_img">
-                    <p class="fs-5"><span class="fw-bold fs-2">Description:</span> {{ listing.description }}</p>
+                    <h2 class="fw-bold fs-2">Description:</h2>
+                    <p class="fs-5">{{ listing.description }}</p>
                 </div>
                 <div class="col">
                     {% if listing.current_bid %}
@@ -69,7 +70,8 @@
                         <button type="submit" class="badge text-bg-secondary fs-5">Add to WatchList</button>
                     </form>
                     <h2 class="fw-bold fs-1">Listing: {{ listing.title }}</h2>
-                    <p class="fs-5">Description: {{ listing.description }}</p>
+                    <h2 class="fw-bold fs-2">Description:</h2>
+                    <p class="fs-5">{{ listing.description }}</p>
                    {% if listing.current_bid %}
                     <p class="fw-bold fs-2">Current Price: ${{ listing.current_bid }}</p>
                     {% else %}
