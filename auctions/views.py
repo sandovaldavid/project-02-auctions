@@ -1,11 +1,14 @@
+from decimal import Decimal, InvalidOperation
+
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from .forms import ListingForm
-from .models import User, Listing
+from .forms import ListingForm, BidForm
+from .models import User, Listing, Bid, Watchlist
+
 
 def index(request):
     list_user = Listing.objects.filter(active=True)
@@ -78,6 +81,56 @@ def new_auctions(request):
                 'form': form
             })
     else:
-
         form = ListingForm()
     return render(request, "auctions/newAuctions.html", {'form': form})
+
+def listing(request, listing_id):
+    auction = Listing.objects.get(pk=listing_id)
+    return render(request, "auctions/auction.html", {
+        'listing': auction
+    })
+
+def bid(request, listing_id):
+    auction = get_object_or_404(Listing, pk=listing_id)
+    message = None
+    message_success = None
+    if request.method == 'POST':
+        bid_form = BidForm(request.POST)
+        if bid_form.is_valid():
+            bid_value = bid_form.cleaned_data['amount']
+            if auction.current_bid is None or bid_value > auction.current_bid:
+                auction.current_bid = bid_value
+                auction.save()
+                Bid.objects.create(user=request.user, listing=auction, amount=bid_value)
+                message_success = "Your bid is now the current bid!"
+                bid_form = BidForm()
+            else:
+                message = "Your bid must be higher than the current bid."
+
+        return render(request, "auctions/auction.html", {
+            'listing': auction,
+            'form': bid_form,
+            'message': message,
+            'message_success': message_success
+        })
+    bid_form = BidForm()
+    return render(request, "auctions/auction.html", {
+        'form': bid_form,
+        'listing': auction,
+    })
+
+def watchlist(request, listing_id):
+    user = request.user
+    if request.method == 'POST':
+        listings_in_watchlist = Watchlist.objects.filter(user=user, listing__id=listing_id, active=True)
+        if listings_in_watchlist.exists():
+            return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
+        else:
+            current_listing = Listing.objects.get(pk=listing_id)
+            Watchlist.objects.create(user=user, listing=current_listing, active=True)
+            return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
+    else:
+        listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True)
+        return render(request, 'auctions/watchList.html', {
+            'listings': listings_in_watchlist
+        })
