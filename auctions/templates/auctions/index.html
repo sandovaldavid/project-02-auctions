@@ -2,7 +2,7 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-    <div class="d-flex align-items-center flex-column vh-100" >
+    <div class="d-flex align-items-center flex-column" >
         {% for auction in listings %}
             <div class="card shadow p-3 mb-5 bg-body-tertiary rounded col-md-6" >
                 <div class="row g-0">
@@ -23,5 +23,20 @@
               </div>
             </div>
         {% endfor %}
+    </div>
+        <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if listings.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ listings.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ listings.number }} of {{ listings.paginator.num_pages }}.
+            </span>
+            {% if listings.has_next %}
+                <a href="?page={{ listings.next_page_number }}">next</a>
+                <a href="?page={{ listings.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
     </div>
 {% endblock %}

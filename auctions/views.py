@@ -11,8 +11,11 @@ from .models import User, Listing, Bid, Watchlist
 
 def index(request):
     list_user = Listing.objects.filter(active=True)
+    paginator = Paginator(list_user, 10)
+    page_number = request.GET.get('page')
+    page_listings = paginator.get_page(page_number)
     return render(request, "auctions/index.html", {
-        'listings': list_user
+        'listings': page_listings
     })
 
 def login_view(request):
