@@ -170,17 +170,12 @@ def close_auction(request, listing_id):
     if request.user != listing.user:
         messages.error(request, "You are not authorized to close this auction.")
         return redirect('listing', listing_id=listing_id)
-
-    # Encuentra la oferta más alta
     highest_bid = listing.bids.order_by('-amount').first()
     if highest_bid:
         listing.winner = highest_bid.user
     else:
         messages.warning(request, "No bids were placed on this listing.")
-
-    # Marca la subasta como inactiva
     listing.active = False
     listing.save()
-
     messages.success(request, "The auction has been closed.")
     return redirect('listing', listing_id=listing_id)
