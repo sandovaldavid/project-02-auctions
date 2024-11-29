@@ -10,7 +10,7 @@ from .forms import ListingForm, BidForm, CommentForm
 from .models import User, Listing, Bid, Watchlist
 
 def index(request):
-    list_user = Listing.objects.filter(active=True)
+    list_user = Listing.objects.filter(active=True).order_by('-created')
     paginator = Paginator(list_user, 10)
     page_number = request.GET.get('page')
     page_listings = paginator.get_page(page_number)
@@ -150,7 +150,7 @@ def watchlist(request, listing_id):
             Watchlist.objects.create(user=user, listing=current_listing, active=True)
             return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
     else:
-        listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True)
+        listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True).order_by('-created')
         paginator = Paginator(listings_in_watchlist, 10)
         page_number = request.GET.get('page')
         page_listings = paginator.get_page(page_number)
