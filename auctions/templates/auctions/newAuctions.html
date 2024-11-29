@@ -37,11 +37,9 @@
         <div class="form-group">
             <label for="category">Category</label>
             <select class="form-control" name="category" id="category">
-                <option value="Fashion" {% if form.category.value == 'Fashion' %}selected{% endif %}>Fashion</option>
-                <option value="Toys" {% if form.category.value == 'Toys' %}selected{% endif %}>Toys</option>
-                <option value="Electronics" {% if form.category.value == 'Electronics' %}selected{% endif %}>Electronics</option>
-                <option value="Home" {% if form.category.value == 'Home' %}selected{% endif %}>Home</option>
-                <option value="Other" {% if form.category.value == 'Other' %}selected{% endif %}>Other</option>
+                 {% for value, display in category_choices %}
+                    <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>{{ display }}</option>
+                {% endfor %}
             </select>
             {% for error in form.category.errors %}
                 <div style="color: red;">{{ error }}</div>

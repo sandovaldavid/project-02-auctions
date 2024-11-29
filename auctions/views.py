@@ -70,6 +70,7 @@ def register(request):
         return render(request, "auctions/register.html")
 @login_required
 def new_auctions(request):
+    category_choices = ListingForm.CATEGORY_CHOICES
     if request.method == 'POST':
         form = ListingForm(request.POST)
         if form.is_valid():
@@ -80,11 +81,12 @@ def new_auctions(request):
             return redirect('index')
         else:
             return render(request, "auctions/newAuctions.html", {
-                'form': form
+                'form': form,
+                'category_choices': category_choices
             })
     else:
         form = ListingForm()
-    return render(request, "auctions/newAuctions.html", {'form': form})
+    return render(request, "auctions/newAuctions.html", {'form': form, 'category_choices': category_choices})
 
 def listing(request, listing_id):
     auction = get_object_or_404(Listing, id=listing_id)

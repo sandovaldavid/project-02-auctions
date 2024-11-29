@@ -4,6 +4,17 @@ from .models import Listing, Bid, Comment
 import re
 
 class ListingForm(forms.ModelForm):
+    CATEGORY_CHOICES = [
+        # ('value', 'display_name')
+        ('Fashion', 'Fashion'),
+        ('Toys', 'Toys'),
+        ('Electronics', 'Electronics'),
+        ('Home', 'Home'),
+        ('Books', 'Books'),
+        ('Other', 'Other'),
+    ]
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES, widget=forms.Select)
+
     class Meta:
         model = Listing
         fields = ['title', 'description', 'starting_bid', 'image', 'category']
