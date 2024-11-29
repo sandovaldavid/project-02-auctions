@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -19,6 +20,12 @@ class Listing(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.starting_bid}"
+
+    def get_remove_url(self, request=None):
+        relative_url = reverse('watchlist_remove', args=[self.id])
+        if request:
+            return request.build_absolute_uri(relative_url)
+        return relative_url
 
 class Bid(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
