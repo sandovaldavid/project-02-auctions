@@ -151,6 +151,8 @@ def watchlist(request, listing_id):
             return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
     else:
         listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True)
+        for item in listings_in_watchlist:
+            item.remove_url = item.get_remove_url(request)
         paginator = Paginator(listings_in_watchlist, 10)
         page_number = request.GET.get('page')
         page_listings = paginator.get_page(page_number)
