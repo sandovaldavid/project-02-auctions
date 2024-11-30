@@ -84,3 +84,11 @@ class CommentForm(forms.ModelForm):
         labels = {
             'text': 'Add a comment:',
         }
+
+    def clean_text(self):
+        text = self.cleaned_data.get('text')
+        if not text or text.strip() == "":
+            raise forms.ValidationError("Comment cannot be empty.")
+        if len(text) < 5:
+            raise forms.ValidationError("Comment must be at least 5 characters long.")
+        return text

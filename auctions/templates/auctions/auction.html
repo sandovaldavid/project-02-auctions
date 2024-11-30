@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    {% include 'auctions/components/alert.html' %}
     <div class=" container pt-2 px-md-5">
         <div class="row justify-content-center">
             {% if listing.image %}
@@ -105,14 +106,23 @@
             {% endif %}
         </div>
         <div class="mt-md-3">
-            {% if user.is_authenticated %}
-                <form action="{% url 'listing' listing.id %}" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" name="comment" class="btn btn-primary">Add Comment</button>
-                </form>
-            {% endif %}
-            <h3>Comments</h3>
+            <form action="{% url 'comment' listing.id %}" method="post" class="mb-md-2">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <div class="text-danger fw-bold">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_text" class="fs-2 fw-bold">Add a comment:</label>
+                    {{ form.text }}
+                    {% for error in form.text.errors %}
+                        <div class="text-danger fw-bold">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary mt-md-3">Add Comment</button>
+            </form>
+            <h3 class="fs-2 fw-bold">Comments</h3>
             {% for comment in comments %}
                 <div class="card mb-3">
                     <div class="card-body">
