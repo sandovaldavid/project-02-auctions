@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
@@ -104,18 +105,26 @@ def listing(request, listing_id):
 @login_required
 def bid(request, listing_id):
     auction = get_object_or_404(Listing, pk=listing_id)
+    comment_auction = auction.comments.all().count()
     if request.method == 'POST':
         bid_form = BidForm(request.POST)
         if bid_form.is_valid():
             bid_value = bid_form.cleaned_data['amount']
-            if auction.current_bid is None or bid_value > auction.current_bid:
-                auction.current_bid = bid_value
-                auction.save()
-                Bid.objects.create(user=request.user, listing=auction, amount=bid_value)
-                messages.success(request, "Your bid has been placed.")
+            try:
+                auction.place_bid(user=request.user, bid_value=bid_value)
+                messages.success(request, "Your bid has been placed successfully.")
+                messages.info(request, f"({comment_auction}) bid(s) so far. Your bid is the current bid.")
+                return redirect('listing', listing_id=listing_id)
+            except ValidationError as e:
+                bid_form.add_error('amount', str(e)[2:-2])
         else:
-            messages.error(request, "Your bid must be higher than the current bid.")
-    return redirect('listing', listing_id=listing_id)
+            messages.error(request, "There was an error with your bid. Please review and try again.")
+        return render(request, "auctions/auction.html", {
+            'listing': auction,
+            'form': bid_form,
+            'comments': auction.comments.all()
+        })
+
 
 def watchlist(request, listing_id):
     user = request.user

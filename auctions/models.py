@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
@@ -26,6 +27,13 @@ class Listing(models.Model):
         if request:
             return request.build_absolute_uri(relative_url)
         return relative_url
+
+    def place_bid(self, user, bid_value):
+        if self.current_bid is not None and bid_value <= self.current_bid:
+            raise ValidationError("The bid must be higher than the current bid.")
+        self.current_bid = bid_value
+        self.save()
+        Bid.objects.create(user=user, listing=self, amount=bid_value)
 
 class Bid(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
