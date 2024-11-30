@@ -7,8 +7,8 @@
         <div class="row justify-content-center" >
             {% if listings %}
                 {% for auction in listings %}
-                {% include "auctions/components/card.html" with auction=auction remove_url=auction.get_remove_url%}
-            {% endfor %}
+                    {% include "auctions/components/card.html" with auction=auction remove_url=auction.get_remove_url%}
+                {% endfor %}
             {% else %}
                 <p class="text-muted">Your watchlist is empty.</p>
             {% endif %}
