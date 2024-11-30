@@ -181,3 +181,18 @@ def close_auction(request, listing_id):
     listing.save()
     messages.success(request, "The auction has been closed.")
     return redirect('listing', listing_id=listing_id)
+
+def categories(request):
+    category = request.GET.get('category')
+    if category:
+        listings = Listing.objects.filter(category=category, active=True)
+    else:
+        listings = Listing.objects.filter(active=True)
+    paginator = Paginator(listings, 10)
+    page_number = request.GET.get('page')
+    listings = paginator.get_page(page_number)
+    return render(request, 'auctions/categories.html', {
+        'listings': listings,
+        'category_choices': ListingForm.CATEGORY_CHOICES,
+        'selected_category': category
+    })
