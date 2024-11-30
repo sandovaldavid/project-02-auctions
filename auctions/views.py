@@ -7,7 +7,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .forms import ListingForm, BidForm, CommentForm
-from .models import User, Listing, Bid, Watchlist
+from .models import User, Listing, Bid, Watchlist, Comment
+
 
 def index(request):
     list_user = Listing.objects.filter(active=True).order_by('-created')
@@ -90,22 +91,12 @@ def new_auctions(request):
 
 def listing(request, listing_id):
     auction = get_object_or_404(Listing, id=listing_id)
-    if request.method == "POST" and "comment" in request.POST:
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.user = request.user
-            comment.listing = auction
-            comment.save()
-            messages.success(request, "Your comment has been added.")
-            return redirect('listing', listing_id=listing_id)
-    else:
-        form = CommentForm()
     comments = auction.comments.all()
+    form = CommentForm()
     return render(request, "auctions/auction.html", {
         'listing': auction,
-        'form': form,
-        'comments': comments
+        'comments': comments,
+        'form': form
     })
 
 @login_required
@@ -196,3 +187,24 @@ def categories(request):
         'category_choices': ListingForm.CATEGORY_CHOICES,
         'selected_category': category
     })
+
+@login_required
+def comment(request, listing_id):
+    auction = get_object_or_404(Listing, pk=listing_id)
+    comments = auction.comments.filter(listing=auction)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_auction = form.save(commit=False)
+            comment_auction.user = request.user
+            comment_auction.listing = auction
+            comment_auction.save()
+            messages.success(request, "Your comment has been added.")
+        else:
+            messages.error(request, "There was an error with your comment.")
+            return render(request, "auctions/auction.html", {
+                'listing': auction,
+                'comments': comments,
+                'form': form
+            })
+    return redirect('listing', listing_id=listing_id)
