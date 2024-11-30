@@ -40,17 +40,13 @@
                             {% csrf_token %}
                             <div class="form-group mt-3 mb-2">
                                 <label for="amount" class="fs-2 fw-bold">Bid ($)</label>
-                                <br>
                                 {% if message_success %}
-                                    <span class="text-success fw-bold">{{ message_success }}</span>
+                                    <p class="text-success fw-bold">{{ message_success }}</p>
                                 {% endif %}
                                 <input type="number" class="form-control fs-4 " id="amount" name="amount" placeholder="$ 00.00" value="{{ form.cleaned_data.amount|default:'' }}">
                                 {% for error in form.amount.errors %}
                                     <div class="text-danger">{{ error }}</div>
                                 {% endfor %}
-                                {% if message %}
-                                    <span class="text-danger">{{ message }}</span>
-                                {% endif %}
                             </div>
                             <button type="submit" class="btn btn-primary fs-5">Place Bid</button>
                         </form>
