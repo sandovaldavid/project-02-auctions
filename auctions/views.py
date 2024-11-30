@@ -1,14 +1,15 @@
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+
 from .forms import ListingForm, BidForm, CommentForm
-from .models import User, Listing, Bid, Watchlist, Comment
+from .models import User, Listing, Watchlist
 
 
 def index(request):
@@ -19,6 +20,7 @@ def index(request):
     return render(request, "auctions/index.html", {
         'listings': page_listings
     })
+
 
 def login_view(request):
     if request.method == "POST":
@@ -70,6 +72,8 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
 @login_required
 def new_auctions(request):
     category_choices = ListingForm.CATEGORY_CHOICES
@@ -92,6 +96,7 @@ def new_auctions(request):
         form = ListingForm()
     return render(request, "auctions/newAuctions.html", {'form': form, 'category_choices': category_choices})
 
+
 def listing(request, listing_id):
     auction = get_object_or_404(Listing, id=listing_id)
     comments = auction.comments.all()
@@ -101,6 +106,7 @@ def listing(request, listing_id):
         'comments': comments,
         'form': form
     })
+
 
 @login_required
 def bid(request, listing_id):
@@ -138,13 +144,15 @@ def watchlist(request, listing_id):
             Watchlist.objects.create(user=user, listing=current_listing, active=True)
             return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
     else:
-        listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True).order_by('-created')
+        listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True).order_by(
+            '-created')
         paginator = Paginator(listings_in_watchlist, 10)
         page_number = request.GET.get('page')
         page_listings = paginator.get_page(page_number)
         return render(request, 'auctions/watchList.html', {
             'listings': page_listings
         })
+
 
 def watchlist_remove(request, listing_id):
     user = request.user
@@ -153,6 +161,7 @@ def watchlist_remove(request, listing_id):
     watchlist_item.active = False
     watchlist_item.save()
     return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
+
 
 def close_auction(request, listing_id):
     listing = get_object_or_404(Listing, id=listing_id)
@@ -170,6 +179,7 @@ def close_auction(request, listing_id):
     messages.success(request, "The auction has been closed.")
     return redirect('listing', listing_id=listing_id)
 
+
 def categories(request):
     category = request.GET.get('category')
     if category:
@@ -184,6 +194,7 @@ def categories(request):
         'category_choices': ListingForm.CATEGORY_CHOICES,
         'selected_category': category
     })
+
 
 @login_required
 def comment(request, listing_id):

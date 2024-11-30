@@ -1,7 +1,10 @@
+import re
+
 from django import forms
 from django.core.exceptions import ValidationError
+
 from .models import Listing, Bid, Comment
-import re
+
 
 class ListingForm(forms.ModelForm):
     CATEGORY_CHOICES = [
@@ -54,6 +57,7 @@ class ListingForm(forms.ModelForm):
                 raise ValidationError("Invalid URL format.")
         return url
 
+
 class BidForm(forms.ModelForm):
     class Meta:
         model = Bid
@@ -67,6 +71,7 @@ class BidForm(forms.ModelForm):
         if bid_value <= 0:
             raise forms.ValidationError("The bid must be greater than 0.")
         return bid_value
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

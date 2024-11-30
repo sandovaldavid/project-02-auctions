@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('auctions', '0002_alter_user_id'),
     ]
@@ -23,8 +22,10 @@ class Migration(migrations.Migration):
                 ('category', models.CharField(blank=True, max_length=64)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('active', models.BooleanField(default=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='listings', to=settings.AUTH_USER_MODEL)),
-                ('winner', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='won_listings', to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='listings',
+                                           to=settings.AUTH_USER_MODEL)),
+                ('winner', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                             related_name='won_listings', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -32,8 +33,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('text', models.TextField()),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL)),
-                ('listing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='auctions.listing')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments',
+                                           to=settings.AUTH_USER_MODEL)),
+                ('listing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments',
+                                              to='auctions.listing')),
             ],
         ),
         migrations.CreateModel(
@@ -41,8 +44,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bids', to=settings.AUTH_USER_MODEL)),
-                ('listing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bids', to='auctions.listing')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bids',
+                                           to=settings.AUTH_USER_MODEL)),
+                ('listing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bids',
+                                              to='auctions.listing')),
             ],
         ),
     ]

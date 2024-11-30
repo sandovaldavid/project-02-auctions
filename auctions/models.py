@@ -7,6 +7,7 @@ from django.urls import reverse
 class User(AbstractUser):
     pass
 
+
 class Listing(models.Model):
     title = models.CharField(max_length=64, blank=True)
     description = models.TextField(blank=True)
@@ -35,6 +36,7 @@ class Listing(models.Model):
         self.save()
         Bid.objects.create(user=user, listing=self, amount=bid_value)
 
+
 class Bid(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bids")
@@ -43,6 +45,7 @@ class Bid(models.Model):
     def __str__(self):
         return f"{self.user} bid {self.amount} on {self.listing.title}"
 
+
 class Comment(models.Model):
     text = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
@@ -50,6 +53,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user} commented on {self.listing.title}"
+
 
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="watchlist")
