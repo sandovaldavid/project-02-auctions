@@ -102,6 +102,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary fs-5">Place Bid</button>
                     </form>
+                    <div>
+                        {% if user.id == listing.user.id%}
+                            <form action="{% url 'close_auction' listing.id %}" method="post" class="mt-md-2">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Close Auction</button>
+                            </form>
+                        {% endif %}
+                    </div>
                 </div>
             {% endif %}
         </div>
