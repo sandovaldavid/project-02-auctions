@@ -104,8 +104,6 @@ def listing(request, listing_id):
 @login_required
 def bid(request, listing_id):
     auction = get_object_or_404(Listing, pk=listing_id)
-    message = None
-    message_success = None
     if request.method == 'POST':
         bid_form = BidForm(request.POST)
         if bid_form.is_valid():
@@ -114,22 +112,10 @@ def bid(request, listing_id):
                 auction.current_bid = bid_value
                 auction.save()
                 Bid.objects.create(user=request.user, listing=auction, amount=bid_value)
-                message_success = "Your bid is now the current bid!"
-                bid_form = BidForm()
-            else:
-                message = "Your bid must be higher than the current bid."
-
-        return render(request, "auctions/auction.html", {
-            'listing': auction,
-            'form': bid_form,
-            'message': message,
-            'message_success': message_success
-        })
-    bid_form = BidForm()
-    return render(request, "auctions/auction.html", {
-        'form': bid_form,
-        'listing': auction,
-    })
+                messages.success(request, "Your bid has been placed.")
+        else:
+            messages.error(request, "Your bid must be higher than the current bid.")
+    return redirect('listing', listing_id=listing_id)
 
 def watchlist(request, listing_id):
     user = request.user
