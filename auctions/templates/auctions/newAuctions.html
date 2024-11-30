@@ -3,6 +3,7 @@
 
 {% block title %}Add Auction{% endblock %}
 {% block body %}
+    {% include "auctions/components/alert.html" %}
     <h2 class="title_main">New Auction</h2>
     <form action="{% url 'addAuctions' %}" method="post" id="form-auction">
         {% csrf_token %}

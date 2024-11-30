@@ -78,9 +78,11 @@ def new_auctions(request):
             # Set the logged-in user
             listing = form.save(commit=False)  # Don't save yet
             listing.user = request.user  # Set the user
-            listing.save()  # Now save the Listing
+            listing.save()  # Now save the Listing}
+            messages.success(request, "Your listing has been created.")
             return redirect('index')
         else:
+            messages.error(request, "There was an error with created your listing.")
             return render(request, "auctions/newAuctions.html", {
                 'form': form,
                 'category_choices': category_choices
