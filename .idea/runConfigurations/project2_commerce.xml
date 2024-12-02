@@ -9,7 +9,7 @@
       <env name="DJANGO_SETTINGS_MODULE" value="commerce.settings" />
     </envs>
     <option name="SDK_HOME" value="" />
-    <option name="SDK_NAME" value="Python 3.13 (project2_commerce)" />
+    <option name="SDK_NAME" value="env_commerce" />
     <option name="WORKING_DIRECTORY" value="F:\project2_commerce" />
     <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
