@@ -3,8 +3,12 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "web",
   "workspaceFolder": "/app",
-  "settings": {
-    "python.defaultInterpreterPath": "/opt/env/bin/python"
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/env/bin/python"
+      }
+    }
   },
   "extensions": [
     "ms-python.python"
