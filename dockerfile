@@ -1,5 +1,8 @@
 FROM python:3.13.0
 
+RUN python -m venv /opt/env
+ENV PATH="/opt/env/bin:$PATH"
+
 WORKDIR /app
 
 COPY requirements.txt .
