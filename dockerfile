@@ -1,6 +1,7 @@
 FROM python:3.13.0
 
 RUN python -m venv /opt/env
+RUN /opt/env/bin/pip install --upgrade pip
 ENV PATH="/opt/env/bin:$PATH"
 
 WORKDIR /app
