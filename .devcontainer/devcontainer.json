@@ -1,6 +1,7 @@
 {
   "name": "Django Dev Container",
   "dockerComposeFile": "../docker-compose.yml",
+  "Dockerfile": "../Dockerfile",
   "service": "web",
   "workspaceFolder": "/app",
   "customizations": {
