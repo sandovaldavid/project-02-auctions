@@ -183,9 +183,9 @@ def close_auction(request, listing_id):
 def categories(request):
     category = request.GET.get('category')
     if category:
-        listings = Listing.objects.filter(category=category, active=True)
+        listings = Listing.objects.filter(category=category, active=True).order_by('-created')
     else:
-        listings = Listing.objects.filter(active=True)
+        listings = Listing.objects.filter(active=True).order_by('-created')
     paginator = Paginator(listings, 10)
     page_number = request.GET.get('page')
     listings = paginator.get_page(page_number)
