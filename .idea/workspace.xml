@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918322ed-271e-4ed5-ae74-cfcb08d05103" name="Changes" comment=":wrench: .idea">
-      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" afterPath="$PROJECT_DIR$/.devcontainer/devcontainer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-    </list>
+    <list default="true" id="918322ed-271e-4ed5-ae74-cfcb08d05103" name="Changes" comment=":package: Update Docker containers" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -124,6 +119,7 @@
       <workItem from="1733281819059" duration="689000" />
       <workItem from="1733282633218" duration="61000" />
       <workItem from="1733291336022" duration="12000" />
+      <workItem from="1733291430987" duration="181000" />
     </task>
     <task id="LOCAL-00001" summary=":wrench: .idea">
       <option name="closed" value="true" />
@@ -181,7 +177,31 @@
       <option name="project" value="LOCAL" />
       <updated>1733279359364</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary=":wrench: .idea">
+      <option name="closed" value="true" />
+      <created>1733291441952</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733291441952</updated>
+    </task>
+    <task id="LOCAL-00009" summary=":package: Update Docker containers">
+      <option name="closed" value="true" />
+      <created>1733291458169</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733291458169</updated>
+    </task>
+    <task id="LOCAL-00010" summary=":package: Update Docker containers">
+      <option name="closed" value="true" />
+      <created>1733291603651</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733291603651</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,8 +209,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=":construction_worker: Add github action" />
-    <MESSAGE value=":package: Update Docker containers" />
     <MESSAGE value=":wrench: .idea" />
-    <option name="LAST_COMMIT_MESSAGE" value=":wrench: .idea" />
+    <MESSAGE value=":package: Update Docker containers" />
+    <option name="LAST_COMMIT_MESSAGE" value=":package: Update Docker containers" />
   </component>
 </project>
