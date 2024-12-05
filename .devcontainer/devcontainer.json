@@ -19,7 +19,6 @@
 			]
 		}
 	},
-	"workspaceFolder": "/workspace",
 	"mounts": [
 		"source=project2_commerce_CS50W,target=/workspace/project2_commerce,type=volume"
 	],
