@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="env_commerce" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="env_commerce" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13 (workspace)" project-jdk-type="Python SDK" />
 </project>
