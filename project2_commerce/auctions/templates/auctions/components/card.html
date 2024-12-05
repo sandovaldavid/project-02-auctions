@@ -1,0 +1,30 @@
+<div class="card shadow p-3 mb-5 bg-body-tertiary rounded col-md-8">
+    {% if remove_url %}
+        <a href="{{ remove_url }}" class="btn-close position-absolute top-0 end-0 p-md-3" onclick="return confirm('Are you sure you want to remove this item?');"></a>
+    {% endif %}
+    <div class="row g-0">
+        {% if auction.image %}
+            <div class="col-md-4">
+                <img src="{{ auction.image }}" class="img-fluid rounded-start" alt="{{ auction.title }}_img">
+            </div>
+        {% endif %}
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ auction.title }}</h5>
+                <p><span class="fs-6 fw-bold">Price:</span> ${{ auction.starting_bid|floatformat:2 }}</p>
+                <p class="card-text">{{ auction.description }}</p>
+                <p class="card-text">
+                    <small class="text-body-secondary">Created {{ auction.created|date:"F j, Y" }}</small>
+                </p>
+                {% if user == auction.winner %}
+                    <div class="alert alert-success">
+                        Congratulations! You won this auction with the highest bid.
+                    </div>
+                {% endif %}
+                <a href="{% url 'listing' auction.id %}" class="btn btn-primary col-md-3">View</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

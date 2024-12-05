@@ -1,0 +1,51 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block title %}Add Auction{% endblock %}
+{% block body %}
+    {% include "auctions/components/alert.html" %}
+    <h2 class="title_main">New Auction</h2>
+    <form action="{% url 'addAuctions' %}" method="post" id="form-auction">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control" type="text" name="title" id="title" placeholder="Invisibility Cloak" value="{{ form.title.value|default:'' }}">
+            {% for error in form.title.errors %}
+                <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" id="description" rows="4" placeholder="Enter a description">{{ form.description.value|default:'' }}</textarea>
+            {% for error in form.description.errors %}
+                <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="starting_bid">Starting Bid</label>
+            <input class="form-control" type="number" name="starting_bid" id="starting_bid" placeholder="$70.00" value="{{ form.starting_bid.value|default:'' }}">
+            {% for error in form.starting_bid.errors %}
+                <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="image">Image URL</label>
+            <input class="form-control" type="text" name="image" id="image_url" placeholder="https://example.com/imagen.jpg" value="{{ form.image.value|default:'' }}">
+            {% for error in form.image.errors %}
+                <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" name="category" id="category">
+                 {% for value, display in category_choices %}
+                    <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>{{ display }}</option>
+                {% endfor %}
+            </select>
+            {% for error in form.category.errors %}
+                <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <input class="btn btn-outline-primary" type="submit" value="Add Auction">
+    </form>
+{% endblock %}
