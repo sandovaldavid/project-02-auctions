@@ -31,7 +31,10 @@
                 "editor.wordWrap": "on",
                 "editor.rulers": [80, 120],
                 "editor.renderWhitespace": "all"
-			}
+      },
+      "extensions": [
+        "ms-python.python"
+      ]
 		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
