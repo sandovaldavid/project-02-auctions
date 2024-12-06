@@ -4,13 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918322ed-271e-4ed5-ae74-cfcb08d05103" name="Changes" comment="format code">
-      <change afterPath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0005_alter_listing_title.py" afterDir="false" />
+    <list default="true" id="918322ed-271e-4ed5-ae74-cfcb08d05103" name="Changes" comment=":package: update workspace in devcontainer">
       <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" afterPath="$PROJECT_DIR$/.devcontainer/devcontainer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project2_commerce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/project2_commerce.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commerce/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/commerce/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.devcontainer/devcontainer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.github/dependabot.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.idea/project2_commerce.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/README.Docker.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/context_processors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0002_alter_user_id.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0003_listing_comment_bid.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0004_alter_listing_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0005_alter_listing_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0006_alter_listing_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0007_alter_listing_title.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0008_alter_listing_description_alter_listing_starting_bid.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0009_alter_listing_image.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0010_alter_listing_image.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0011_listing_current_bid.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0012_alter_bid_amount.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0013_watchlist.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0014_watchlist_active.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/0015_alter_comment_text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/static/auctions/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/auction.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/categories.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/components/alert.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/components/card.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/components/pagination.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/layout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/newAuctions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/templates/auctions/watchList.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/auctions/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/commerce/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/commerce/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/commerce/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/commerce/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/commerce/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/desktop.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project2_commerce/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +79,12 @@
     &quot;assignee&quot;: &quot;sandovaldavid&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/sandovaldavid/Project02_Commerce.git",
-    "accountId": "c1f15e77-e709-4958-b1f1-ddfa56597339"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sandovaldavid/Project02_Commerce.git&quot;,
+    &quot;accountId&quot;: &quot;3c402caa-e510-45ed-8197-555c46f74391&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
@@ -61,11 +111,11 @@
 }</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
-      <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
+      <window_info id="Bookmarks" side_tool="true" />
       <window_info id="Merge Requests" show_stripe_button="false" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Learn" show_stripe_button="false" />
-      <window_info active="true" id="Commit" order="0" visible="true" weight="0.26399738" />
+      <window_info id="Commit" order="0" weight="0.23795572" />
       <window_info id="Welcome to GitHub Copilot" order="1" show_stripe_button="false" weight="0.29785156" />
       <window_info id="Endpoints" order="2" weight="0.19563803" />
       <window_info id="Pull Requests" order="3" weight="0.29785156" />
@@ -73,22 +123,22 @@
       <window_info id="Django.Structure" order="5" side_tool="true" weight="0.18847656" />
       <window_info id="Structure" order="6" weight="0.19173178" />
       <window_info id="Backup and Sync History" order="7" show_stripe_button="false" weight="0.26399738" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
-      <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="HfCacheToolWindow" show_stripe_button="false" />
       <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.40034765" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32966396" />
       <window_info anchor="bottom" id="Services" order="4" />
       <window_info anchor="bottom" id="Python Packages" order="5" weight="0.28794903" />
       <window_info anchor="bottom" id="Python Console" order="6" weight="0.1" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.40034765" />
       <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="SciView" show_stripe_button="false" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="0" weight="0.23990884" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="0" weight="0.23535156" />
       <window_info anchor="right" id="AIAssistant" order="1" show_stripe_button="false" weight="0.25" />
       <window_info anchor="right" id="Database" order="2" weight="0.25" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
@@ -130,8 +180,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PY-243.22562.68" />
-        <option value="bundled-python-sdk-434b4e3f034a-9a18a617cbe4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.22562.68" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
+        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
       </set>
     </attachedChunks>
   </component>
@@ -150,6 +200,11 @@
       <workItem from="1733291430987" duration="181000" />
       <workItem from="1733360079646" duration="39000" />
       <workItem from="1733361043976" duration="457000" />
+      <workItem from="1733361508183" duration="221000" />
+      <workItem from="1733361733214" duration="200000" />
+      <workItem from="1733361959493" duration="17000" />
+      <workItem from="1733367807544" duration="1843000" />
+      <workItem from="1733371018244" duration="1590000" />
     </task>
     <task id="LOCAL-00001" summary=":wrench: .idea">
       <option name="closed" value="true" />
@@ -255,7 +310,39 @@
       <option name="project" value="LOCAL" />
       <updated>1733361399345</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary=":card_file_box: Migrations DB">
+      <option name="closed" value="true" />
+      <created>1733361569022</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733361569022</updated>
+    </task>
+    <task id="LOCAL-00015" summary=":wrench: .idea">
+      <option name="closed" value="true" />
+      <created>1733361583090</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733361583090</updated>
+    </task>
+    <task id="LOCAL-00016" summary=":sparkles: add ip localhost to settings">
+      <option name="closed" value="true" />
+      <created>1733361630080</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1733361630080</updated>
+    </task>
+    <task id="LOCAL-00017" summary=":package: update workspace in devcontainer">
+      <option name="closed" value="true" />
+      <created>1733361654211</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1733361654211</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,9 +350,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=":construction_worker: Add github action" />
-    <MESSAGE value=":wrench: .idea" />
     <MESSAGE value=":package: Update Docker containers" />
     <MESSAGE value="format code" />
-    <option name="LAST_COMMIT_MESSAGE" value="format code" />
+    <MESSAGE value=":card_file_box: Migrations DB" />
+    <MESSAGE value=":wrench: .idea" />
+    <MESSAGE value=":sparkles: add ip localhost to settings" />
+    <MESSAGE value=":package: update workspace in devcontainer" />
+    <option name="LAST_COMMIT_MESSAGE" value=":package: update workspace in devcontainer" />
   </component>
 </project>
