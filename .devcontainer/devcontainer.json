@@ -2,9 +2,16 @@
 	"name": "Project2_Commerce_devContainer",
 	"build": {
 		"context": "..",
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "Dockerfile"
 	},
 	"customizations": {
+		"jetbrains": {
+			"settings": {
+				"org.jetbrains.plugins.github:app:GithubSettings.clone_git_using_ssh": true,
+				"com.intellij:app:HttpConfigurable.use_proxy_pac": true,
+				"org.jetbrains.plugins.terminal:app:TerminalOptionsProvider.myShellPath": "/bin/zsh"
+			}
+		},
 		"vscode": {
 			"settings": {
 				"terminal.integrated.shell.linux": "zsh",
