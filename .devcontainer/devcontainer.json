@@ -1,41 +1,39 @@
 {
-	"name": "Project2_Commerce_devContainer",
-	"build": {
-		"context": "..",
-		"dockerfile": "Dockerfile"
-	},
+  "name": "Project2_commerce",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/workspace",
+	// Configure tool-specific properties.
 	"customizations": {
-		"jetbrains": {
-			"settings": {
-				"org.jetbrains.plugins.github:app:GithubSettings.clone_git_using_ssh": true,
-				"com.intellij:app:HttpConfigurable.use_proxy_pac": true,
-				"org.jetbrains.plugins.terminal:app:TerminalOptionsProvider.myShellPath": "/bin/zsh"
-			}
-		},
+      "jetbrains":{
+        "settings":{
+          "org.jetbrains.plugins.terminal:app:TerminalOptionsProvider.myShellPath":"/usr/bin/zsh",
+          "com.intellij:app:BuiltInServerOptions.builtInServerPort":59550,
+          "com.intellij:app:HttpConfigurable.use_proxy_pac":true
+        }
+      },
+		// Configure properties specific to VS Code.
 		"vscode": {
+			// Set *default* container specific settings.json values on container create.
 			"settings": {
-				"terminal.integrated.shell.linux": "zsh",
-				"terminal.integrated.profiles.linux": {
-					"zsh": { "path": "/bin/zsh" }
-				}
-			},
-			"extensions": [
-				"ms-python.python", 
-				"batisteo.vscode-django",
-				"ms-python.vscode-pylance"
-			]
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "python.linting.pylintEnabled": true,
+                "terminal.integrated.shell.linux": "/bin/zsh",
+                "terminal.integrated.shellArgs.linux": ["-l"],
+                "terminal.integrated.fontSize": 14,
+                "editor.fontLigatures": true,
+                "editor.fontSize": 14,
+                "editor.formatOnSave": true,
+                "editor.tabSize": 4,
+                "editor.wordWrap": "on",
+                "editor.rulers": [80, 120],
+                "editor.renderWhitespace": "all"
+			}
 		}
 	},
-	"workspaceFolder": "/workspace",
-	"mounts": [
-		"source=project2_commerce_CS50W,target=/workspace/project2_commerce,type=volume"
-	],
-	"forwardPorts": [8000],
-	"remoteEnv": {
-		"DJANGO_SETTINGS_MODULE": "commerce.settings",
-		"DEBUG": "True"
-	},
-	"postCreateCommand": "python manage.py migrate",
-	"postStartCommand": "zsh",
-	"updateContentCommand": "python manage.py migrate"
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8000]
 }
