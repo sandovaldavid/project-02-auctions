@@ -1,0 +1,236 @@
+/* Light Mode Colors */
+:root {
+    --card-bg: rgba(255, 255, 255, 0.98);
+    --text-primary: #2c3e50;
+    --text-secondary: #34495e;
+    --text-muted: #d6e5e6;
+    --price-color: #27ae60;
+    --price-icon: #2ecc71;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Colors */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --card-bg: rgba(44, 62, 80, 0.95);
+        --text-primary: #f8f9fa;
+        --text-secondary: #e9ecef;
+        --text-muted: #cbd5e0;
+        --price-color: #2ecc71;
+        --price-icon: #27ae60;
+        --card-shadow: rgba(0, 0, 0, 0.3);
+    }
+}
+
+.text-muted,
+small.text-muted,
+.card-meta .text-muted {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.card {
+    background: var(--card-bg);
+    box-shadow: 0 8px 20px var(--card-shadow);
+}
+
+.card-title {
+    color: var(--text-primary);
+    text-shadow: 0 1px 1px var(--card-shadow);
+    font-weight: 600;
+}
+
+.description-text {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.price-tag {
+    color: var(--price-color);
+    font-weight: 600;
+    text-shadow: 0 1px 1px var(--card-shadow);
+}
+
+.card-meta {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px var(--card-shadow);
+}
+
+/* Card Base Styles */
+.card {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+/* Auction Card Specific */
+.auction-card {
+    transition: all 0.3s ease;
+    border: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-container {
+    min-height: 200px;
+    background-color: #f8f9fa;
+    border-radius: 0.375rem 0 0 0.375rem;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Card Content */
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.price-tag {
+    font-size: 1.1rem;
+    color: #2ecc71;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.price-tag i {
+    font-size: 1rem;
+    color: #27ae60;
+}
+
+.description-text {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Card Footer */
+.card-footer {
+    background: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.5rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(44, 62, 80, 0.98);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-container {
+        background-color: #2c3e50;
+    }
+
+    .card-title {
+        color: #ecf0f1;
+    }
+
+    .price-tag {
+        color: #2ecc71;
+    }
+
+    .price-tag i {
+        color: #27ae60;
+    }
+
+    .description-text {
+        color: #bdc3c7;
+    }
+
+    .card-footer {
+        border-top-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .image-container {
+        min-height: 180px;
+        border-radius: 0.375rem 0.375rem 0 0;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .price-tag {
+        font-size: 1rem;
+    }
+
+    .description-text {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+    }
+}
