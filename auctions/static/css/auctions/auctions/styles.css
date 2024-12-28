@@ -92,6 +92,13 @@
     border-radius: 15px;
 }
 
+.comments-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
 .comment-card {
     background: var(--bg-secondary);
     border-radius: 10px;
@@ -136,6 +143,112 @@
     margin-bottom: 1rem;
 }
 
+/* Comment Form Styles */
+.comment-form {
+    margin-bottom: 2rem;
+}
+
+.comment-form textarea.form-control {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    min-height: 120px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+    resize: none;
+}
+
+.comment-form textarea.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+    background: var(--bg-main);
+}
+
+.comment-form textarea.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+/* Error Feedback */
+.invalid-feedback {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--danger-color);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.invalid-feedback i {
+    color: var(--danger-color);
+}
+
+/* Post Comment Button */
+.comment-form .btn-primary {
+    background: var(--gradient-primary);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-form .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .comment-form textarea.form-control {
+        background: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+
+    .comment-form textarea.form-control:focus {
+        background: var(--bg-accent);
+        border-color: var(--primary-color);
+    }
+
+    .comment-form textarea.form-control::placeholder {
+        color: var(--text-muted);
+    }
+
+    .invalid-feedback {
+        background: rgba(231, 76, 60, 0.2);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .comment-form textarea.form-control {
+        min-height: 100px;
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+
+    .comment-form .btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem;
+    }
+}
+
+/* Description Secttion */
+.card-text {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
 
 /* Watchlist Button Styles */
 .btn-outline-heart {
@@ -245,4 +358,3 @@
         gap: 0.5rem;
     }
 }
-
