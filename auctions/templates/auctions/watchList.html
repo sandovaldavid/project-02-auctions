@@ -22,10 +22,9 @@
         {% if listings %}
         <div class="row row-cols-1 row-cols-md-2 g-4">
             {% for auction in listings %}
-            <div class="col">
-                {% include "auctions/components/card.html" with auction=auction
-                remove_url=auction.get_remove_url %}
-            </div>
+                <div class="col">
+                    {% include "auctions/components/card.html" with auction=auction %}
+                </div>
             {% endfor %}
         </div>
 
