@@ -16,13 +16,14 @@
 
     /* Background Colors - Light */
     --bg-main: rgba(255, 255, 255, 0.98);
-    --bg-secondary: #f8f9fa;
+    --bg-secondary: rgba(213, 211, 211, 0.5);
     --bg-accent: #2c3e50;
     --bg-hover: rgba(52, 152, 219, 0.1);
     --bg-user: rgba(52, 152, 219, 0.2);
     --card-bg: rgba(126, 123, 123, 0.1);
     --card-top: rgba(0, 0, 0, 0.1);
     --gradient-primary: linear-gradient(45deg, #3498db, #2980b9);
+    --border-color: #929294;
 
     /* Text Colors - Light */
     --text-primary: #2c3e50;
@@ -75,7 +76,7 @@
     --price-icon: #27ae60;
 
     /* Border & Shadow - Dark */
-    --border-color: #2c3e50;
+    --border-color: #606b76b9;
     --border-light: #34495e;
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
