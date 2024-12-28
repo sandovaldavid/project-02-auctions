@@ -49,6 +49,7 @@
 .price-section {
     background: linear-gradient(145deg, var(--bg-secondary), var(--bg-main));
     border-radius: 15px;
+    border: 1px solid var(--border-color);
     padding: 1.5rem;
 }
 
@@ -205,28 +206,6 @@
 .comment-form .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .comment-form textarea.form-control {
-        background: var(--bg-secondary);
-        border-color: var(--border-color);
-        color: var(--text-primary);
-    }
-
-    .comment-form textarea.form-control:focus {
-        background: var(--bg-accent);
-        border-color: var(--primary-color);
-    }
-
-    .comment-form textarea.form-control::placeholder {
-        color: var(--text-muted);
-    }
-
-    .invalid-feedback {
-        background: rgba(231, 76, 60, 0.2);
-    }
 }
 
 /* Responsive Adjustments */
