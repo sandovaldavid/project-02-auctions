@@ -110,10 +110,21 @@
 
 /* Base Styles */
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     color: var(--text-primary);
     background: var(--bg-main),
         url("https://images.unsplash.com/photo-1597186601824-9ca7c0f26c5f?q=80") fixed;
     background-size: cover;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 
@@ -207,33 +218,128 @@ body {
     color: var(--toggle-icon);
 }
 
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
 
-/* Responsive Adjustments */
-@media (max-width: 991px) {
-    .navbar-collapse {
-        background: inherit;
-        padding: 1rem;
-        border-radius: 10px;
-        margin-top: 1rem;
+@media (max-width: 992px) {
+    .container {
+        max-width: 960px;
     }
 
-    .user-info {
-        margin-top: 1rem;
-        justify-content: center;
+    .py-4 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .row {
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+
+    .col,
+    [class*="col-"] {
+        padding-right: 10px;
+        padding-left: 10px;
     }
 }
 
 @media (max-width: 768px) {
-    .brand-title {
+    .container {
+        max-width: 720px;
+        padding: 0 1rem;
+    }
+
+    .py-4 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    .display-4 {
         font-size: 2rem;
     }
 
-    .nav-link {
-        padding: 0.5rem 1rem;
+    .lead {
+        font-size: 1rem;
     }
 
+    .row {
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+    .col,
+    [class*="col-"] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+}
+
+@media (max-width: 576px) {
     .container {
+        max-width: 100%;
         padding: 0 0.75rem;
+    }
+
+    .py-4 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .display-4 {
+        font-size: 1.75rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .row {
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+
+    .col,
+    [class*="col-"] {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    /* Grid system adjustments */
+    .row-cols-1>* {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .py-4 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+
+    .card {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Dark Mode Adjustments */
+@media (max-width: 768px) {
+    [data-theme="dark"] .container {
+        background: var(--bg-main);
+    }
+
+    [data-theme="dark"] .card {
+        background: var(--bg-secondary);
     }
 }
 
