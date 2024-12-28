@@ -1,8 +1,8 @@
 /* Login Page Styles */
 .card {
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--bg-main);
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
     transition: transform 0.3s ease;
 }
 
@@ -12,14 +12,10 @@
 
 /* Header Section */
 .card-title {
-    color: #2c3e50;
+    color: var(--text-primary);
     font-weight: 600;
     font-size: 2rem;
     margin-bottom: 0.5rem;
-}
-
-.text-muted {
-    color: #7f8c8d !important;
 }
 
 /* Icon Styles */
@@ -36,7 +32,7 @@
 .form-label {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: var(--text-primary);
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
@@ -46,6 +42,8 @@
     transition: all 0.3s ease;
     border-radius: 10px;
     overflow: hidden;
+    background: var(--bg-main);
+    border: 1px solid var(--border-light);
 }
 
 .input-group:focus-within {
@@ -53,29 +51,30 @@
 }
 
 .input-group-text {
-    background: #f8f9fa;
-    border: 2px solid #e9ecef;
+    background: var(--bg-main);
+    border: 2px solid var(--border-light);
     border-right: none;
-    color: #2c3e50;
+    color: var(--text-primary);
     padding: 0.75rem 1rem;
 }
 
 .form-control {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-light);
     border-left: none;
     padding: 1rem;
     font-size: 1rem;
-    color: #2c3e50;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
 }
 
 .form-control:focus {
-    border-color: #3498db;
     box-shadow: none;
-    background-color: #fff;
+    border: none;
+    border-left: 1px solids rgba(52, 152, 219, 0.25);
 }
 
 .form-control::placeholder {
-    color: #95a5a6;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
@@ -109,6 +108,10 @@
 
 .alert i {
     color: #dc3545;
+}
+
+.text-center>p {
+    color: var(--text-primary);
 }
 
 /* Register Link */
@@ -160,37 +163,5 @@
 
     .fa-user-circle {
         font-size: 3em !important;
-    }
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-    .card {
-        background: rgba(44, 62, 80, 0.98);
-    }
-
-    .card-title,
-    .form-label {
-        color: #ecf0f1;
-    }
-
-    .input-group-text {
-        background: #34495e;
-        border-color: #2c3e50;
-        color: #ecf0f1;
-    }
-
-    .form-control {
-        background: #34495e;
-        border-color: #2c3e50;
-        color: #ecf0f1;
-    }
-
-    .form-control::placeholder {
-        color: #95a5a6;
-    }
-
-    .text-muted {
-        color: #bdc3c7 !important;
     }
 }
