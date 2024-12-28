@@ -3,7 +3,7 @@
     /* Light Mode Colors */
     --primary-color: #3498db;
     /* Bright Blue */
-    --primary-dark: #2980b9;
+    --primary-dark: #2c3e50;
     /* Dark Blue */
     --primary-light: #ebf5fb;
     /* Light Blue */
@@ -52,6 +52,7 @@
 
     /* Shadow */
     --shadow-lg: 0 10px 15px rgba(83, 116, 133, 0.3);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
     --card-shadow: rgba(0, 0, 0, 0.471);
     --border-light: #f1f2f6;
 }
@@ -98,6 +99,7 @@
     /* Darker Red */
     --info-color: #2980b9;
     /* Darker Blue */
+    --primary-dark: #2980b9;
 
     /* Gradient Colors - Dark */
     --gradient-primary: linear-gradient(45deg, #2980b9, #2c3e50);
