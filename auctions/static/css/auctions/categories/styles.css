@@ -139,6 +139,10 @@
     margin-bottom: 2rem;
 }
 
+.listing-item {
+    margin: 1.5rem 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .category-grid {
