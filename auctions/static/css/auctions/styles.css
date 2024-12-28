@@ -53,6 +53,7 @@
     /* Shadow */
     --shadow-lg: 0 10px 15px rgba(83, 116, 133, 0.3);
     --card-shadow: rgba(0, 0, 0, 0.471);
+    --border-light: #f1f2f6;
 }
 
 /* Dark Mode Colors */
@@ -75,7 +76,7 @@
     /* Light Gray */
     --text-secondary: #bdc3c7;
     /* Medium Gray */
-    --text-muted: #95a5a6;
+    --text-muted: #95a5a68c;
     --price-color: #2ecc71;
     --price-icon: #27ae60;
 
