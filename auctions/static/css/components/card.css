@@ -135,7 +135,8 @@ small.text-muted,
 
     .row {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
     }
 
     .image-container {
@@ -150,6 +151,9 @@ small.text-muted,
     .description-text {
         font-size: 0.9rem;
         -webkit-line-clamp: 2;
+    }
+    .col{
+        width: 100%;
     }
 }
 
