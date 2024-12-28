@@ -17,8 +17,9 @@
     /* Background Colors - Light */
     --bg-main: rgba(255, 255, 255, 0.98);
     --bg-secondary: #f8f9fa;
-    --bg-accent: #ffffff;
+    --bg-accent: #2c3e50;
     --bg-hover: rgba(52, 152, 219, 0.1);
+    --bg-user:rgba(52, 152, 219, 0.2);
 
     /* Text Colors - Light */
     --text-primary: #2c3e50;
@@ -39,7 +40,8 @@
     /* Red */
     --info-color: #3498db;
     /* Blue */
-    --toggle-icon: #f1c40f
+    --toggle-icon: #f1c40f;
+    --shadow-lg: 0 10px 15px rgba(83, 116, 133, 0.3);
 }
 
 /* Dark Mode Colors */
@@ -49,9 +51,10 @@
     /* Dark Navy */
     --bg-secondary: #34495e;
     /* Medium Navy */
-    --bg-accent: #2c3e50;
+    --bg-accent: #f1f2f6;
     /* Dark Navy */
-    --bg-hover: rgba(52, 152, 219, 0.2);
+    --bg-hover: rgba(52, 152, 219, 0.3);
+    --bg-user:rgba(52, 152, 219, 0.2);
 
     /* Text Colors - Dark */
     --text-primary: #ecf0f1;
@@ -82,7 +85,7 @@
     --gradient-primary: linear-gradient(45deg, #2980b9, #2c3e50);
     --gradient-secondary: linear-gradient(45deg, #c0392b, #2c3e50);
     --bg-main: linear-gradient(rgba(44, 62, 80, 0.97), rgba(44, 62, 80, 0.97));
-    --toggle-icon: #fff
+    --toggle-icon: #fff;
 }
 
 /* Base Styles */
