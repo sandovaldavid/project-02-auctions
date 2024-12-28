@@ -65,9 +65,14 @@
         <link
             href="{% static 'css/auctions/auctions/styles.css' %}"
             rel="stylesheet"
+        />
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg sticky-top">
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-sun" id="themeIcon"></i>
+            </button>
             <div class="container">
                 <a href="{% url 'index' %}" class="brand-title">
                     <i class="fas fa-gavel me-2"></i>Auctions
@@ -147,5 +152,31 @@
         <div class="container py-4">{% block body %}{% endblock %}</div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function toggleTheme() {
+                const body = document.body;
+                const icon = document.getElementById('themeIcon');
+                
+                // Toggle data-theme attribute instead of class
+                if (body.getAttribute('data-theme') === 'dark') {
+                    body.removeAttribute('data-theme');
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+            
+            // Update theme check
+            document.addEventListener('DOMContentLoaded', () => {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.setAttribute('data-theme', 'dark');
+                    document.getElementById('themeIcon').classList.replace('fa-sun', 'fa-moon');
+                }
+            });
+        </script>
     </body>
 </html>
