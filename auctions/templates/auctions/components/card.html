@@ -1,75 +1,74 @@
-<div class="card auction-card shadow p-3 mb-4 bg-body-tertiary rounded">
-    {% if remove_url %}
-        <a href="{{ remove_url }}" class="btn-close position-absolute top-0 end-0 m-3" 
-           onclick="return confirm('Are you sure you want to remove this item from your watchlist?');"
-           title="Remove from watchlist">
-        </a>
-    {% endif %}
-    
-    <div class="row g-0">
-        <div class="col-md-4">
-            {% if auction.image %}
-                <img src="{{ auction.image }}" class="img-fluid rounded auction-image" alt="{{ auction.title }}">
-            {% else %}
-                <div class="no-image-placeholder">
-                    <i class="fas fa-image fa-4x text-muted"></i>
-                </div>
-            {% endif %}
-        </div>
+<div class="card auction-card h-100 shadow-sm">
+    {% if auction %}
+        {% if remove_url %}
+            <button onclick="if(confirm('Remove from watchlist?')) window.location.href='{{ remove_url }}'" 
+                    class="btn-close position-absolute top-0 end-0 m-3" 
+                    type="button"
+                    aria-label="Remove from watchlist">
+            </button>
+        {% endif %}
         
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title text-truncate mb-3" title="{{ auction.title }}">
-                    <i class="fas fa-gavel me-2 text-primary"></i>{{ auction.title }}
-                </h5>
-                
-                <div class="price-tag mb-3">
-                    <i class="fas fa-tag me-2"></i>
-                    <span class="fw-bold">Price:</span> 
-                    ${{ auction.starting_bid|floatformat:2 }}
-                </div>
-                
-                <p class="card-text description-text mb-3">
-                    {{ auction.description|truncatechars:100 }}
-                </p>
-                
-                <div class="card-meta mb-3">
-                    <small class="text-muted">
-                        <i class="far fa-calendar-alt me-1"></i>
-                        Created {{ auction.created|date:"F j, Y" }}
-                    </small>
-                    
-                    {% if auction.category %}
-                        <small class="text-muted ms-3">
-                            <i class="fas fa-folder me-1"></i>
-                            {{ auction.category }}
-                        </small>
-                    {% endif %}
-                </div>
-
-                {% if user == auction.winner %}
-                    <div class="alert alert-success d-flex align-items-center mb-3">
-                        <i class="fas fa-trophy me-2"></i>
-                        Congratulations! You won this auction!
-                    </div>
-                {% endif %}
-
-                <div class="card-actions">
-                    <a href="{% url 'listing' auction.id %}" class="btn btn-primary">
-                        <i class="fas fa-eye me-2"></i>View Details
-                    </a>
-                    
-                    {% if auction.active %}
-                        <span class="badge bg-success ms-2">
-                            <i class="fas fa-check-circle me-1"></i>Active
-                        </span>
+        <div class="row g-0 h-100">
+            <div class="col-md-4">
+                <div class="image-container h-100">
+                    {% if auction.image %}
+                        <img src="{{ auction.image }}" 
+                            class="img-fluid rounded-start auction-image w-100 h-100" 
+                            alt="{{ auction.title }}"
+                            style="object-fit: cover;">
                     {% else %}
-                        <span class="badge bg-secondary ms-2">
-                            <i class="fas fa-times-circle me-1"></i>Closed
-                        </span>
+                        <div class="no-image-placeholder d-flex align-items-center justify-content-center h-100">
+                            <i class="fas fa-image fa-3x text-muted"></i>
+                        </div>
                     {% endif %}
                 </div>
             </div>
+            
+            <div class="col-md-8">
+                <div class="card-body d-flex flex-column h-100">
+                    <div class="mb-auto">
+                        <h5 class="card-title text-truncate" title="{{ auction.title }}">
+                            <i class="fas fa-gavel me-2 text-primary"></i>{{ auction.title }}
+                        </h5>
+                        
+                        <div class="price-tag my-2">
+                            <i class="fas fa-tag me-2 text-success"></i>
+                            <span class="fw-bold">Current Price:</span> 
+                            ${{ auction.current_bid|default:auction.starting_bid|floatformat:2 }}
+                        </div>
+                        
+                        <p class="card-text description-text">
+                            {{ auction.description|truncatechars:100 }}
+                        </p>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent border-0 p-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="card-meta">
+                                <small class="text-muted">
+                                    <i class="far fa-calendar-alt me-1"></i>
+                                    {{ auction.created|date:"M d, Y" }}
+                                </small>
+                                {% if auction.category %}
+                                    <small class="text-muted ms-2">
+                                        <i class="fas fa-folder me-1"></i>
+                                        {{ auction.category }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                            
+                            <a href="{% url 'listing' auction.id %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye me-1"></i>View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div class="card-body text-center">
+            <i class="fas fa-exclamation-circle fa-2x text-muted mb-2"></i>
+            <p class="text-muted mb-0">Auction not available</p>
+        </div>
+    {% endif %}
 </div>
