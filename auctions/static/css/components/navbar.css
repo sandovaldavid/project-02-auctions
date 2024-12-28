@@ -1,6 +1,6 @@
 /* Navbar Base Styles */
 .navbar {
-    box-shadow:var(--shadow-lg);
+    box-shadow: var(--shadow-lg);
     padding: 0.75rem 1.5rem;
     position: sticky;
     top: 0;
@@ -98,21 +98,118 @@
     outline: none;
 }
 
-/* Responsive Adjustments */
+/* Responsive Navbar Styles */
 @media (max-width: 991px) {
     .navbar {
         padding: 0.5rem 1rem;
     }
 
     .navbar-collapse {
-        background: inherit;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-main);
         padding: 1rem;
-        border-radius: 10px;
-        margin-top: 1rem;
+        box-shadow: var(--shadow-lg);
+        border-radius: 0 0 15px 15px;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-nav {
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .user-info {
+        margin: 1rem 0;
+        justify-content: center;
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .theme-toggle {
+        position: relative;
+        margin-right: 1rem;
     }
 
     .brand-title {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+    }
+
+    .brand-title i {
+        font-size: 1.3rem;
+    }
+}
+
+/* Tablet Specific Styles */
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-collapse {
+        padding: 1.5rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+    }
+
+    .user-info {
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile Specific Styles */
+@media (max-width: 767px) {
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    .navbar-toggler {
+        padding: 0.4rem;
+    }
+
+    .brand-title {
+        font-size: 1.3rem;
+    }
+
+    .brand-title i {
+        font-size: 1.2rem;
+    }
+
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .user-info {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+
+    /* Badge adjustments for mobile */
+    .badge {
+        font-size: 0.7rem;
+        padding: 0.35em 0.65em;
+    }
+}
+
+/* Landscape Mode Adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .navbar-collapse {
+        max-height: 80vh;
     }
 
     .nav-link {
@@ -121,7 +218,18 @@
 
     .user-info {
         margin: 0.5rem 0;
-        justify-content: center;
+    }
+}
+
+/* Dark Mode Adjustments */
+@media (max-width: 991px) {
+    [data-theme="dark"] .navbar-collapse {
+        background: var(--bg-main);
+        border: 1px solid var(--border-color);
+    }
+
+    [data-theme="dark"] .nav-link:hover {
+        background: var(--bg-hover);
     }
 }
 
