@@ -52,7 +52,8 @@ class ListingForm(forms.ModelForm):
     def clean_image(self):
         url = self.cleaned_data.get('image')
         if url:
-            url_pattern = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+            url_pattern = (r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\."
+                            r"[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)")
             if not re.match(url_pattern, url):
                 raise ValidationError("Invalid URL format.")
         return url
