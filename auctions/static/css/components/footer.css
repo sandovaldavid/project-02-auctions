@@ -23,6 +23,7 @@
 
 .footer .social-links a {
     font-size: 1.5rem;
+    margin-right: 1rem;
 }
 
 .footer hr {
@@ -44,4 +45,105 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+/* Responsive Footer */
+@media (max-width: 992px) {
+    .footer {
+        padding: 1.5rem 0;
+    }
+
+    .footer h5 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .social-links {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.25rem 0;
+    }
+
+    .footer .row {
+        text-align: center;
+    }
+
+    .footer .col-md-4 {
+        margin-bottom: 1.5rem;
+    }
+
+    .footer h5 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer .social-links {
+        justify-content: center;
+        display: flex;
+        margin-top: 1rem;
+    }
+
+    .footer ul.list-unstyled li {
+        margin-bottom: 0.5rem;
+    }
+
+    .footer hr {
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer {
+        padding: 1rem 0;
+    }
+
+    .footer .container {
+        padding: 0 1rem;
+    }
+
+    .footer p {
+        font-size: 0.9rem;
+    }
+
+    .footer .social-links a {
+        font-size: 1.25rem;
+        margin-right: 0.75rem;
+    }
+
+    .footer ul.list-unstyled li {
+        font-size: 0.9rem;
+    }
+
+    .footer .row>div:last-child {
+        margin-bottom: 0;
+    }
+
+    .footer i {
+        width: 20px;
+        text-align: center;
+        margin-right: 0.5rem;
+    }
+}
+
+/* Make footer sticky for all screen sizes */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    .footer {
+        background-color: var(--bg-secondary);
+        border-top: 1px solid var(--border-color);
+    }
 }
