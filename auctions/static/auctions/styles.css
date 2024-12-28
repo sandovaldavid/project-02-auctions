@@ -385,3 +385,98 @@ body {
         font-size: 3rem;
     }
 }
+
+/* card.html */
+
+/* Auction Card Styles */
+.auction-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border: none;
+    border-radius: 15px;
+}
+
+.auction-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.auction-image {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.no-image-placeholder {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.price-tag {
+    font-size: 1.1rem;
+    color: #2ecc71;
+}
+
+.description-text {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    line-height: 1.5;
+    max-height: 4.5em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.card-meta {
+    font-size: 0.85rem;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+}
+
+.badge {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .auction-card {
+        margin-bottom: 1rem;
+    }
+
+    .auction-image {
+        height: 150px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .price-tag {
+        font-size: 1rem;
+    }
+
+    .description-text {
+        font-size: 0.9rem;
+    }
+}
