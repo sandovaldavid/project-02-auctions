@@ -11,6 +11,7 @@ urlpatterns = [
     path("listing/<int:listing_id>", views.listing, name="listing"),
     path("bid/<int:listing_id>", views.bid, name="bid"),
     path("watchlist/<int:listing_id>", views.watchlist, name="watchlist"),
+    # skipcq: FLK-E501
     path("Watchlist_remove/<int:listing_id>", views.watchlist_remove, name="watchlist_remove"),
     path('listing/<int:listing_id>/close', views.close_auction, name='close_auction'),
     path('categories/', views.categories, name='categories'),
