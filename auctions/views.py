@@ -34,10 +34,9 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
-        else:
-            return render(request, "auctions/login.html", {
-                "message": "Invalid username and/or password."
-            })
+        return render(request, "auctions/login.html", {
+            "message": "Invalid username and/or password."
+        })
     else:
         return render(request, "auctions/login.html")
 
@@ -86,15 +85,15 @@ def new_auctions(request):
             listing.save()  # Now save the Listing}
             messages.success(request, "Your listing has been created.")
             return redirect('index')
-        else:
-            messages.error(request, "There was an error with created your listing.")
-            return render(request, "auctions/newAuctions.html", {
-                'form': form,
-                'category_choices': category_choices
-            })
+        messages.error(request, "There was an error with created your listing.")
+        return render(request, "auctions/newAuctions.html", {
+            'form': form,
+            'category_choices': category_choices
+        })
     else:
         form = ListingForm()
-    return render(request, "auctions/newAuctions.html", {'form': form, 'category_choices': category_choices})
+    return render(request, "auctions/newAuctions.html", 
+                {'form': form, 'category_choices': category_choices})
 
 
 def listing(request, listing_id):
@@ -119,33 +118,40 @@ def bid(request, listing_id):
             try:
                 auction.place_bid(user=request.user, bid_value=bid_value)
                 messages.success(request, "Your bid has been placed successfully.")
-                messages.info(request, f"({comment_auction}) bid(s) so far. Your bid is the current bid.")
+                messages.info(
+                    request, 
+                    f"({comment_auction}) bid(s) so far. Your bid is the current bid."
+                )
                 return redirect('listing', listing_id=listing_id)
             except ValidationError as e:
                 bid_form.add_error('amount', str(e)[2:-2])
         else:
-            messages.error(request, "There was an error with your bid. Please review and try again.")
+            messages.error(
+                request, 
+                "There was an error with your bid. Please review and try again."
+            )
         return render(request, "auctions/auction.html", {
             'listing': auction,
             'form': bid_form,
             'comments': auction.comments.all()
         })
+    return None
 
 
 def watchlist(request, listing_id):
     user = request.user
     if request.method == 'POST':
-        listings_in_watchlist = Watchlist.objects.filter(user=user, listing__id=listing_id)
+        listings_in_watchlist = Watchlist.objects.filter(user=user, 
+                                                        listing__id=listing_id)
         if listings_in_watchlist.exists():
             listings_in_watchlist.update(active=True)
             return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
-        else:
-            current_listing = Listing.objects.get(pk=listing_id)
-            Watchlist.objects.create(user=user, listing=current_listing, active=True)
-            return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
+        current_listing = Listing.objects.get(pk=listing_id)
+        Watchlist.objects.create(user=user, listing=current_listing, active=True)
+        return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
     else:
-        listings_in_watchlist = Listing.objects.filter(watchlist__user=user, watchlist__active=True).order_by(
-            '-created')
+        listings_in_watchlist = Listing.objects.filter(
+            watchlist__user=user, watchlist__active=True).order_by('-created')
         paginator = Paginator(listings_in_watchlist, 10)
         page_number = request.GET.get('page')
         page_listings = paginator.get_page(page_number)
@@ -183,7 +189,8 @@ def close_auction(request, listing_id):
 def categories(request):
     category = request.GET.get('category')
     if category:
-        listings = Listing.objects.filter(category=category, active=True).order_by('-created')
+        listings = Listing.objects.filter(category=category, active=True)\
+            .order_by('-created')
     else:
         listings = Listing.objects.filter(active=True).order_by('-created')
     paginator = Paginator(listings, 10)
