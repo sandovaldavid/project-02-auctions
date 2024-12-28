@@ -84,21 +84,14 @@ class CommentForm(forms.ModelForm):
             "text": forms.Textarea(
                 attrs={
                     "class": "form-control",
-                    "rows": 3,
-                    "placeholder": "Write your comment here...",
+                    "rows": 4,
+                    "placeholder": "Share your thoughts about this auction...",
                     "maxlength": "500",
                     "style": "resize: none;",
+                    "aria-label": "Comment text",
                 }
             ),
         }
         labels = {
             "text": "Add a comment:",
         }
-
-    def clean_text(self):
-        text = self.cleaned_data.get("text")
-        if not text or text.strip() == "":
-            raise forms.ValidationError("Comment cannot be empty.")
-        if len(text) < 5:
-            raise forms.ValidationError("Comment must be at least 5 characters long.")
-        return text
