@@ -4,48 +4,130 @@
 {% block title %}Add Auction{% endblock %}
 {% block body %}
     {% include "auctions/components/alert.html" %}
-    <h2 class="title_main">New Auction</h2>
-    <form action="{% url 'addAuctions' %}" method="post" id="form-auction">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input class="form-control" type="text" name="title" id="title" placeholder="Invisibility Cloak" value="{{ form.title.value|default:'' }}">
-            {% for error in form.title.errors %}
-                <div style="color: red;">{{ error }}</div>
-            {% endfor %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <h2 class="card-title text-center mb-4">
+                            <i class="fas fa-plus-circle text-primary me-2"></i>Create New Auction
+                        </h2>
+                        
+                        <form action="{% url 'addAuctions' %}" method="post" id="form-auction" class="needs-validation">
+                            {% csrf_token %}
+                            
+                            <div class="form-group mb-4">
+                                <label for="title" class="form-label fw-bold">
+                                    <i class="fas fa-heading me-2"></i>Title
+                                </label>
+                                <input  class="form-control form-control-lg" 
+                                        type="text" 
+                                        name="title" 
+                                        id="title" 
+                                        placeholder="Enter auction title"
+                                        value="{{ form.title.value|default:'' }}"
+                                        required>
+                                {% for error in form.title.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="description" class="form-label fw-bold">
+                                    <i class="fas fa-align-left me-2"></i>Description
+                                </label>
+                                <textarea class="form-control" 
+                                            name="description" 
+                                            id="description" 
+                                            rows="4" 
+                                            placeholder="Describe your item in detail..."
+                                            required>{{ form.description.value|default:'' }}</textarea>
+                                {% for error in form.description.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="starting_bid" class="form-label fw-bold">
+                                            <i class="fas fa-tag me-2"></i>Starting Bid
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input class="form-control form-control-lg" 
+                                                    type="number" 
+                                                    name="starting_bid" 
+                                                    id="starting_bid" 
+                                                    placeholder="0.00"
+                                                    min="0.01"
+                                                    step="0.01"
+                                                    value="{{ form.starting_bid.value|default:'' }}"
+                                                    required>
+                                        </div>
+                                        {% for error in form.starting_bid.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category" class="form-label fw-bold">
+                                            <i class="fas fa-folder me-2"></i>Category
+                                        </label>
+                                        <select class="form-select form-select-lg" name="category" id="category" required>
+                                            {% for value, display in category_choices %}
+                                                <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>
+                                                    {{ display }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        {% for error in form.category.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-5">
+                                <label for="image" class="form-label fw-bold">
+                                    <i class="fas fa-image me-2"></i>Image URL
+                                </label>
+                                <input  class="form-control" 
+                                        type="url" 
+                                        name="image" 
+                                        id="image_url" 
+                                        placeholder="https://example.com/image.jpg"
+                                        value="{{ form.image.value|default:'' }}">
+                                <div class="form-text">Add an image URL to showcase your item (optional)</div>
+                                {% for error in form.image.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-plus-circle me-2"></i>Create Auction
+                                </button>
+                                <a href="{% url 'index' %}" class="btn btn-light btn-lg">
+                                    <i class="fas fa-arrow-left me-2"></i>Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" name="description" id="description" rows="4" placeholder="Enter a description">{{ form.description.value|default:'' }}</textarea>
-            {% for error in form.description.errors %}
-                <div style="color: red;">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="starting_bid">Starting Bid</label>
-            <input class="form-control" type="number" name="starting_bid" id="starting_bid" placeholder="$70.00" value="{{ form.starting_bid.value|default:'' }}">
-            {% for error in form.starting_bid.errors %}
-                <div style="color: red;">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="image">Image URL</label>
-            <input class="form-control" type="text" name="image" id="image_url" placeholder="https://example.com/imagen.jpg" value="{{ form.image.value|default:'' }}">
-            {% for error in form.image.errors %}
-                <div style="color: red;">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select class="form-control" name="category" id="category">
-                 {% for value, display in category_choices %}
-                    <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>{{ display }}</option>
-                {% endfor %}
-            </select>
-            {% for error in form.category.errors %}
-                <div style="color: red;">{{ error }}</div>
-            {% endfor %}
-        </div>
-        <input class="btn btn-outline-primary" type="submit" value="Add Auction">
-    </form>
+    </div>
 {% endblock %}
