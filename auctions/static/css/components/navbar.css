@@ -1,12 +1,12 @@
 /* Navbar Base Styles */
 .navbar {
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    box-shadow:var(--shadow-lg);
     padding: 0.75rem 1.5rem;
     position: sticky;
     top: 0;
     z-index: 1000;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--bg-main);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -45,7 +45,7 @@
 }
 
 .nav-link {
-    color: #2c3e50;
+    color: var(--bg-accent);
     font-weight: 500;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
@@ -57,19 +57,19 @@
 }
 
 .nav-link:hover {
-    background: rgba(52, 152, 219, 0.1);
-    color: #3498db;
+    background: var(--bg-hover);
+    color: var(--primary-color);
     transform: translateY(-2px);
 }
 
 .nav-link.active {
-    background: #3498db;
-    color: white;
+    background: var(--primary-color);
+    color: var(--primary-light);
 }
 
 /* User Info Section */
 .user-info {
-    background: rgba(52, 152, 219, 0.1);
+    background: var(--bg-user);
     padding: 0.6rem 1.2rem;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -77,11 +77,11 @@
     align-items: center;
     gap: 0.5rem;
     transition: all 0.3s ease;
-    color: #2c3e50;
+    color: var(--text-primary);
 }
 
 .user-info:hover {
-    background: rgba(52, 152, 219, 0.2);
+    background: var(--bg-hover);
     transform: translateY(-2px);
 }
 
@@ -96,51 +96,6 @@
 .navbar-toggler:focus {
     box-shadow: none;
     outline: none;
-}
-
-/* Dark Mode Styles */
-@media (prefers-color-scheme: dark) {
-    .navbar {
-        background: rgba(44, 62, 80, 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .brand-title {
-        color: #e74c3c;
-    }
-
-    .brand-title:hover {
-        color: #ff6b6b;
-    }
-
-    .nav-link {
-        color: #ecf0f1;
-    }
-
-    .nav-link:hover {
-        background: rgba(52, 152, 219, 0.2);
-        color: #3498db;
-    }
-
-    .nav-link.active {
-        background: #3498db;
-        color: #ecf0f1;
-    }
-
-    .user-info {
-        background: rgba(52, 152, 219, 0.2);
-        color: #ecf0f1;
-    }
-
-    .user-info:hover {
-        background: rgba(52, 152, 219, 0.3);
-    }
-
-    .navbar-toggler-icon {
-        filter: invert(1);
-    }
 }
 
 /* Responsive Adjustments */
