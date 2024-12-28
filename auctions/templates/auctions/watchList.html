@@ -1,18 +1,53 @@
-{% extends "auctions/layout.html" %}
+{% extends "auctions/layout.html" %} {% block title %}Watch List{% endblock %}
+{% block body %} {% include "auctions/components/alert.html" %}
 
-{% block title %}Watch List{% endblock %}
-{% block body %}
-   <div class="container py-md-5 h-75">
-       <h2 class="mb-4">Watch Listing </h2>
-        <div class="row justify-content-center" >
-            {% if listings %}
-                {% for auction in listings %}
-                    {% include "auctions/components/card.html" with auction=auction remove_url=auction.get_remove_url%}
-                {% endfor %}
-            {% else %}
-                <p class="text-muted">Your watchlist is empty.</p>
-            {% endif %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="display-4 text-primary">
+                <i class="fas fa-heart me-2"></i>My Watchlist
+            </h2>
+            <p class="lead text-muted">
+                Keep track of auctions you're interested in
+            </p>
         </div>
-   </div>
-{% include "auctions/components/pagination.html" %}
+        <div class="col-auto">
+            <a href="{% url 'index' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-search me-2"></i>Browse Auctions
+            </a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        {% if listings %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for auction in listings %}
+            <div class="col">
+                {% include "auctions/components/card.html" with auction=auction
+                remove_url=auction.get_remove_url %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-5">
+            {% include "auctions/components/pagination.html" %}
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <div class="empty-state">
+                <i class="fas fa-heart-broken fa-4x text-muted mb-3"></i>
+                <h3 class="text-muted">Your watchlist is empty</h3>
+                <p class="text-muted mb-4">
+                    Start adding items you're interested in to keep track of
+                    them
+                </p>
+                <a href="{% url 'index' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-search me-2"></i>Browse Active Auctions
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
 {% endblock %}
