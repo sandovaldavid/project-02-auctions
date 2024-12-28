@@ -8,16 +8,16 @@ small.text-muted,
 
 .card {
     background: var(--card-bg);
-    box-shadow: 0 8px 20px var(--card-shadow) !important;
+    box-shadow: 0 8px 20px var(--card-shadow);
     width: 100%;
-    max-width: 100%;
     margin-bottom: 1rem;
-    transition: all 0.3s ease;
     border: none;
     border-radius: 15px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
     padding: 1.5rem;
+    transition: all 0.3s ease;
 }
 
 .card:hover {
@@ -111,31 +111,131 @@ small.text-muted,
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+/* Desktop Styles (≥992px) */
+@media (min-width: 992px) {
     .card {
-        margin-bottom: 1rem;
+        padding: 1.5rem;
     }
 
     .image-container {
-        min-height: 180px;
+        max-height: 250px;
+        border-radius: 0.375rem 0 0 0.375rem;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Tablet Styles (≥768px and <992px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .card {
+        padding: 1.25rem;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .image-container {
+        max-height: 220px;
+        border-radius: 0.375rem 0 0 0.375rem;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .description-text {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
+    }
+}
+
+/* Mobile Styles (<768px) */
+@media (max-width: 767.98px) {
+    .card {
+        padding: 1rem;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-md-4,
+    .col-md-8 {
+        width: 100%;
+    }
+
+    .image-container {
+        max-height: 200px;
         border-radius: 0.375rem 0.375rem 0 0;
+        margin-bottom: 1rem;
     }
 
     .card-body {
-        padding: 1.25rem;
+        padding: 1rem 0.5rem;
     }
 
     .card-title {
         font-size: 1rem;
     }
 
+    .description-text {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 3;
+    }
+
     .price-tag {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        margin: 0.75rem 0;
+    }
+
+    .card-meta {
+        font-size: 0.8rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Small Mobile Styles (<576px) */
+@media (max-width: 575.98px) {
+    .card {
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+    }
+
+    .image-container {
+        max-height: 180px;
+    }
+
+    .card-body {
+        padding: 0.75rem 0.25rem;
+    }
+
+    .card-title {
+        font-size: 0.95rem;
     }
 
     .description-text {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         -webkit-line-clamp: 2;
+    }
+
+    .card-footer {
+        padding: 0.5rem 0;
+    }
+}
+
+/* Soporte para modo oscuro */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: var(--card-bg);
     }
 }
