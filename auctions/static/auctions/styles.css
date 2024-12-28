@@ -1,44 +1,39 @@
 body {
-    padding: 10px;
+    background: linear-gradient(rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.9)),
+        url("https://images.unsplash.com/photo-1597186601824-9ca7c0f26c5f?q=80") fixed;
+    background-size: cover;
 }
-#form-auction > .form-group {
-    width: 50%;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid cadetblue;
-    margin: 10px;
+
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
 }
-#form-auction{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
+
+.nav-link {
+    color: #2c3e50;
+    font-weight: 500;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
 }
-.title_main{
-    font-size: 2em;
-    color: #2d5454;
-    text-align: center;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid cadetblue;
-    background-color: rgba(95, 158, 160, 0.51);
+
+.nav-link:hover {
+    background: #f8f9fa;
+    color: #e74c3c;
+}
+
+.brand-title {
+    font-size: 2.5rem;
+    color: #e74c3c;
     font-weight: bold;
-    box-shadow: 10px 10px 10px #2d5454;
-    margin-bottom: 20px;
+    text-decoration: none;
 }
-#form-auction > div > input, #form-auction > div > select , #form-auction > div > textarea{
-    border: none;
-    outline: none;
-    box-shadow: none;
-    padding: 5px;
-    margin: 0;
-}
-#form-auction > div > textarea{
-    resize: none;
-}
-#form-auction > div > label{
-    font-size: 1.2em;
-    color: #2d5454;
-    font-weight: bold;
+
+.user-info {
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
 }
