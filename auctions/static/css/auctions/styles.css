@@ -218,34 +218,6 @@ body {
     color: var(--toggle-icon);
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
-}
-
-@media (max-width: 992px) {
-    .container {
-        max-width: 960px;
-    }
-
-    .py-4 {
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-    }
-
-    .row {
-        margin-right: -10px;
-        margin-left: -10px;
-    }
-
-    .col,
-    [class*="col-"] {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-}
 
 @media (max-width: 768px) {
     .container {
