@@ -163,35 +163,25 @@
     }
 
     .nav-link {
-        font-size: 1rem;
+        font-size: 2rem;
     }
 
     .user-info {
         font-size: 0.95rem;
     }
-}
 
-/* Mobile Specific Styles */
-@media (max-width: 767px) {
     .navbar {
         padding: 0.5rem;
+        height: 8vh;
     }
 
     .navbar-toggler {
-        padding: 0.4rem;
+        padding: 1rem;
+        font-size: 2rem;
     }
 
-    .brand-title {
-        font-size: 1.3rem;
-    }
-
-    .brand-title i {
-        font-size: 1.2rem;
-    }
-
-    .nav-link {
-        font-size: 0.95rem;
-        padding: 0.6rem 1rem;
+    .brand-title, .brand-title i {
+        font-size: 3rem;
     }
 
     .user-info {
@@ -205,6 +195,7 @@
         padding: 0.35em 0.65em;
     }
 }
+
 
 /* Landscape Mode Adjustments */
 @media (max-height: 500px) and (orientation: landscape) {
