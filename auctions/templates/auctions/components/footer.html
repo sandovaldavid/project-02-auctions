@@ -1,52 +1,94 @@
 <!-- Footer -->
 <footer class="footer mt-auto py-4">
-    <div class="container">
-        <div class="row g-4">
-            <!-- Brand Column -->
-            <div class="col-md-4">
-                <h5>Auctions</h5>
-                <p class="text-muted">
-                    Your trusted platform for online auctions.
-                </p>
-                <div class="social-links">
-                    <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="me-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="me-3"
-                        ><i class="fab fa-instagram"></i
-                    ></a>
-                </div>
-            </div>
-            <!-- Quick Links -->
-            <div class="col-md-4">
-                <h5>Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'categories' %}">Categories</a></li>
-                    <li>
-                        <a href="{% url 'addAuctions' %}">Create Listing</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Contact Info -->
-            <div class="col-md-4">
-                <h5>Contact Us</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <i class="fas fa-envelope me-2"></i>
-                        contact@auctions.com
-                    </li>
-                    <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
-                    <li>
-                        <i class="fas fa-map-marker-alt me-2"></i> New York, NY
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <hr class="my-4" />
-        <div class="row">
-            <div class="col-12 text-center">
-                <p class="mb-0">&copy; 2024 Auctions. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row g-4">
+			<!-- Brand Column -->
+			<div class="col-md-4 mb-4 mb-md-0">
+				<div class="footer-brand">
+					<h5><i class="fas fa-gavel me-2"></i>Auctions</h5>
+					<p class="footer-description">
+						Your trusted platform for online auctions with secure
+						bidding and premium listings.
+					</p>
+					<div class="social-links">
+						<a href="#" aria-label="Follow us on Facebook">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="#" aria-label="Follow us on Twitter">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="#" aria-label="Follow us on Instagram">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="#" aria-label="Follow us on LinkedIn">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Quick Links -->
+			<div class="col-6 col-md-4 mb-4 mb-md-0">
+				<h5 class="footer-heading">Quick Links</h5>
+				<ul class="footer-links">
+					<li>
+						<a href="{% url 'index' %}">
+							<i class="fas fa-home me-2"></i>Active Listings
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'categories' %}">
+							<i class="fas fa-tags me-2"></i>Categories
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'addAuctions' %}">
+							<i class="fas fa-plus-circle me-2"></i>Create
+							Listing
+						</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li>
+						<a href="{% url 'watchlist' user.id %}">
+							<i class="fas fa-heart me-2"></i>My Watchlist
+						</a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+
+			<!-- Contact Info -->
+			<div class="col-6 col-md-4">
+				<h5 class="footer-heading">Contact Us</h5>
+				<ul class="footer-contact">
+					<li>
+						<i class="fas fa-envelope"></i>
+						<a href="mailto:contact@auctions.com"
+							>contact@auctions.com</a
+						>
+					</li>
+					<li>
+						<i class="fas fa-phone"></i>
+						<span>(123) 456-7890</span>
+					</li>
+					<li>
+						<i class="fas fa-map-marker-alt"></i>
+						<span>New York, NY</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer-divider"></div>
+
+		<div class="footer-bottom">
+			<div class="copyright">
+				&copy; 2024 Auctions. All rights reserved.
+			</div>
+			<div class="footer-legal">
+				<a href="#">Privacy Policy</a>
+				<a href="#">Terms of Service</a>
+			</div>
+		</div>
+	</div>
 </footer>
