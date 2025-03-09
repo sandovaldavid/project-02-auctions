@@ -1,52 +1,82 @@
 <nav aria-label="Page navigation" class="pagination-container">
-    <ul class="pagination justify-content-center">
-        {% if listings.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page=1" title="First Page">
-                <i class="fas fa-angle-double-left"></i>
-                <span class="d-none d-sm-inline ms-1">First</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a
-                class="page-link"
-                href="?page={{ listings.previous_page_number }}"
-                title="Previous Page"
-            >
-                <i class="fas fa-angle-left"></i>
-                <span class="d-none d-sm-inline ms-1">Previous</span>
-            </a>
-        </li>
-        {% endif %}
+	<ul class="pagination justify-content-center">
+		{% if listings.has_previous %}
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?page=1"
+				title="First Page"
+				aria-label="Go to first page">
+				<i class="fas fa-angle-double-left" aria-hidden="true"></i>
+				<span class="d-none d-sm-inline ms-1">First</span>
+			</a>
+		</li>
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?page={{ listings.previous_page_number }}"
+				title="Previous Page"
+				aria-label="Go to previous page (Page {{ listings.previous_page_number }})">
+				<i class="fas fa-angle-left" aria-hidden="true"></i>
+				<span class="d-none d-sm-inline ms-1">Previous</span>
+			</a>
+		</li>
+		{% else %}
+		<li class="page-item disabled">
+			<span class="page-link">
+				<i class="fas fa-angle-double-left" aria-hidden="true"></i>
+				<span class="d-none d-sm-inline ms-1">First</span>
+			</span>
+		</li>
+		<li class="page-item disabled">
+			<span class="page-link">
+				<i class="fas fa-angle-left" aria-hidden="true"></i>
+				<span class="d-none d-sm-inline ms-1">Previous</span>
+			</span>
+		</li>
+		{% endif %}
 
-        <li class="page-item active">
-            <span class="page-link current-page">
-                <i class="fas fa-file-alt me-1"></i>
-                Page {{ listings.number }} of {{ listings.paginator.num_pages }}
-            </span>
-        </li>
+		<li class="page-item active">
+			<span class="page-link current-page" aria-current="page">
+				<i class="fas fa-file-alt me-1" aria-hidden="true"></i>
+				Page {{ listings.number }} of {{ listings.paginator.num_pages }}
+			</span>
+		</li>
 
-        {% if listings.has_next %}
-        <li class="page-item">
-            <a
-                class="page-link"
-                href="?page={{ listings.next_page_number }}"
-                title="Next Page"
-            >
-                <span class="d-none d-sm-inline me-1">Next</span>
-                <i class="fas fa-angle-right"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a
-                class="page-link"
-                href="?page={{ listings.paginator.num_pages }}"
-                title="Last Page"
-            >
-                <span class="d-none d-sm-inline me-1">Last</span>
-                <i class="fas fa-angle-double-right"></i>
-            </a>
-        </li>
-        {% endif %}
-    </ul>
+		{% if listings.has_next %}
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?page={{ listings.next_page_number }}"
+				title="Next Page"
+				aria-label="Go to next page (Page {{ listings.next_page_number }})">
+				<span class="d-none d-sm-inline me-1">Next</span>
+				<i class="fas fa-angle-right" aria-hidden="true"></i>
+			</a>
+		</li>
+		<li class="page-item">
+			<a
+				class="page-link"
+				href="?page={{ listings.paginator.num_pages }}"
+				title="Last Page"
+				aria-label="Go to last page (Page {{ listings.paginator.num_pages }})">
+				<span class="d-none d-sm-inline me-1">Last</span>
+				<i class="fas fa-angle-double-right" aria-hidden="true"></i>
+			</a>
+		</li>
+		{% else %}
+		<li class="page-item disabled">
+			<span class="page-link">
+				<span class="d-none d-sm-inline me-1">Next</span>
+				<i class="fas fa-angle-right" aria-hidden="true"></i>
+			</span>
+		</li>
+		<li class="page-item disabled">
+			<span class="page-link">
+				<span class="d-none d-sm-inline me-1">Last</span>
+				<i class="fas fa-angle-double-right" aria-hidden="true"></i>
+			</span>
+		</li>
+		{% endif %}
+	</ul>
 </nav>
