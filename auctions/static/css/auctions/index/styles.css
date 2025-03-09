@@ -204,6 +204,10 @@
 	gap: 0.75rem;
 }
 
+.card-body {
+	color: var(--text-primary);
+}
+
 .recently-viewed-title i {
 	color: var(--primary-color);
 }
