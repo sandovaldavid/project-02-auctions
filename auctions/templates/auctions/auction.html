@@ -6,8 +6,13 @@
 <div class="container py-5">
     <!-- Auction Details Card -->
     <div class="auction-details">
+        <!-- Back button for better navigation -->
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary back-button mb-4">
+            <i class="fas fa-arrow-left me-2"></i>Back to listings
+        </a>
+        
         <!-- Main Content -->
-        <div class="auction-main card shadow-lg mb-4">
+        <div class="auction-main card shadow-lg mb-4 w-100">
             <div class="row g-0">
                 <!-- Image Column -->
                 <div class="col-lg-6 auction-image-container">
@@ -19,20 +24,45 @@
                             <p class="mt-3">No image available</p>
                         </div>
                     {% endif %}
+                    
+                    <!-- Category badge -->
+                    {% if listing.category %}
+                        <div class="category-badge">
+                            <span class="badge">
+                                <i class="fas fa-tag me-1"></i>{{ listing.category }}
+                            </span>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <!-- Info Column -->
                 <div class="col-lg-6">
                     <div class="auction-content p-4">
                         <!-- Status Badge -->
-                        <div class="status-badge mb-3">
+                        <div class="status-badges mb-3">
                             {% if listing.active %}
                                 <span class="badge bg-success">
                                     <i class="fas fa-check-circle me-1"></i>Active
                                 </span>
+                                {% if listing.is_ending_soon %}
+                                    <span class="badge badge-ending-soon ms-2">
+                                        <i class="fas fa-clock me-1"></i>Ending Soon
+                                    </span>
+                                {% endif %}
                             {% else %}
                                 <span class="badge bg-danger">
                                     <i class="fas fa-times-circle me-1"></i>Closed
+                                </span>
+                                {% if listing.winner %}
+                                    <span class="badge bg-warning text-dark ms-2">
+                                        <i class="fas fa-trophy me-1"></i>Auction Ended
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+                            
+                            {% if listing.is_premium %}
+                                <span class="badge badge-premium ms-2">
+                                    <i class="fas fa-crown me-1"></i>Premium
                                 </span>
                             {% endif %}
                         </div>
@@ -66,10 +96,13 @@
                             <div class="current-price">
                                 <span class="price-label">Current Bid</span>
                                 <span class="price-amount">${{ listing.current_bid|default:listing.starting_bid|floatformat:2 }}</span>
+                                {% if listing.bids_count > 0 %}
+                                    <span class="bids-count">{{ listing.bids_count }} bid{{ listing.bids_count|pluralize }}</span>
+                                {% endif %}
                             </div>
                             <div class="starting-price">
                                 <span class="price-label">Starting Bid</span>
-                                <span class="price-amount">${{ listing.starting_bid|floatformat:2 }}</span>
+                                <span class="starting-amount">${{ listing.starting_bid|floatformat:2 }}</span>
                             </div>
                         </div>
 
@@ -79,29 +112,48 @@
                                 {% if user != listing.user %}
                                     <form action="{% url 'bid' listing.id %}" method="post" class="bid-form mb-4">
                                         {% csrf_token %}
+                                        <label for="bid-amount" class="form-label fw-bold">Place Your Bid</label>
                                         <div class="input-group">
                                             <span class="input-group-text">$</span>
                                             <input type="number" 
-                                                    name="amount" 
-                                                    class="form-control" 
-                                                    step="0.01" 
-                                                    min="{{ listing.current_bid|default:listing.starting_bid }}" 
-                                                    placeholder="Enter your bid amount"
-                                                    required>
+                                                   id="bid-amount"
+                                                   name="amount" 
+                                                   class="form-control" 
+                                                   step="0.01" 
+                                                   min="{{ listing.current_bid|default:listing.starting_bid|add:'0.01' }}" 
+                                                   placeholder="Enter amount higher than current bid"
+                                                   required>
                                             <button class="btn btn-primary bid-button" type="submit">
                                                 <i class="fas fa-gavel me-2"></i>Place Bid
                                             </button>
                                         </div>
+                                        <small class="form-text mt-2">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Minimum bid: ${{ listing.current_bid|default:listing.starting_bid|add:'0.01'|floatformat:2 }}
+                                        </small>
                                     </form>
                                 {% elif user == listing.user %}
-                                    <form action="{% url 'close_auction' listing.id %}" method="post">
-                                        {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger w-100">
-                                            <i class="fas fa-times-circle me-2"></i>Close Auction
-                                        </button>
-                                    </form>
+                                    <div class="owner-actions">
+                                        <form action="{% url 'close_auction' listing.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger w-100">
+                                                <i class="fas fa-times-circle me-2"></i>Close Auction
+                                            </button>
+                                        </form>
+                                        <div class="owner-note mt-2">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            <small>You are the seller of this item</small>
+                                        </div>
+                                    </div>
                                 {% endif %}
                             {% endif %}
+                        {% endif %}
+                        
+                        {% if listing.winner %}
+                            <div class="winner-banner mb-4">
+                                <i class="fas fa-trophy me-2"></i>
+                                This auction has ended and was won by <strong>{{ listing.winner.username }}</strong>
+                            </div>
                         {% endif %}
 
                         <!-- Info Grid -->
@@ -114,12 +166,10 @@
                                 <i class="far fa-calendar-alt"></i>
                                 <span>{{ listing.created|date:"F j, Y" }}</span>
                             </div>
-                            {% if listing.category %}
-                                <div class="info-item">
-                                    <i class="fas fa-tag"></i>
-                                    <span>{{ listing.category }}</span>
-                                </div>
-                            {% endif %}
+                            <div class="info-item">
+                                <i class="fas fa-eye"></i>
+                                <span>{{ listing.views|default:"0" }} views</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +180,7 @@
         <div class="description-card card shadow-sm mb-4">
             <div class="card-body">
                 <h4 class="card-title">
-                    <i class="fas fa-align-left me-2"></i>Description
+                    <i class="fas fa-align-left me-2 text-primary"></i>Description
                 </h4>
                 <p class="card-text">{{ listing.description }}</p>
             </div>
@@ -140,7 +190,7 @@
         <div class="comments-section card shadow-sm">
             <div class="card-body">
                 <h4 class="comments-title mb-4">
-                    <i class="fas fa-comments me-2"></i>Comments
+                    <i class="fas fa-comments me-2 text-primary"></i>Comments
                     <span class="badge bg-secondary">{{ comments|length }}</span>
                 </h4>
 
@@ -149,6 +199,7 @@
                     <form action="{% url 'comment' listing.id %}" method="post" class="comment-form mb-4">
                         {% csrf_token %}
                         <div class="form-group">
+                            <label for="id_text" class="form-label">Share your thoughts</label>
                             {{ form.text }}
                             {% for error in form.text.errors %}
                                 <div class="invalid-feedback d-block">
@@ -172,7 +223,7 @@
                                     <span>{{ comment.user.username }}</span>
                                 </div>
                                 <div class="comment-date">
-                                    <i class="fas fa-clock"></i>
+                                    <i class="fas fa-clock me-1"></i>
                                     <span>{{ comment.created|date:"F j, Y, g:i a" }}</span>
                                 </div>
                             </div>
