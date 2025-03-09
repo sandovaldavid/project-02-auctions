@@ -209,6 +209,10 @@
 }
 
 /* Form elements dark mode support */
+[data-theme='dark'] .card-body {
+	background: var(--card-bg);
+}
+
 [data-theme='dark'] .page-header {
 	background: linear-gradient(
 		135deg,
