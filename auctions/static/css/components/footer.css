@@ -35,17 +35,6 @@
 	color: var(--primary-color);
 }
 
-/* Make footer sticky */
-html {
-	height: 100%;
-}
-
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
-
 /* Responsive Styles */
 @media (max-width: 992px) {
 	.footer {
@@ -111,17 +100,6 @@ body {
 	.footer .row > div:last-child {
 		margin-bottom: 0;
 	}
-}
-
-/* Make footer sticky for all screen sizes */
-html {
-	height: 100%;
-}
-
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
 }
 
 /* Dark Mode Adjustments */
