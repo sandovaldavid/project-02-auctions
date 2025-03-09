@@ -1,134 +1,133 @@
 .footer {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    padding: 2rem 0;
-    margin-top: auto;
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+	padding: 2rem 0;
+	margin-top: auto;
 }
 
 .footer h5 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+	color: var(--primary-color);
+	margin-bottom: 1.5rem;
+	font-weight: 600;
 }
 
 .footer a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease;
+	color: var(--text-secondary);
+	text-decoration: none;
+	transition: color 0.3s ease;
 }
 
 .footer a:hover {
-    color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .footer .social-links a {
-    font-size: 1.5rem;
-    margin-right: 1rem;
+	font-size: 1.5rem;
+	margin-right: 1rem;
 }
 
 .footer hr {
-    border-color: var(--border-color);
-    opacity: 0.2;
+	border-color: var(--border-color);
+	opacity: 0.2;
 }
 
 .footer i {
-    color: var(--primary-color);
+	color: var(--primary-color);
 }
-
 
 /* Make footer sticky */
 html {
-    height: 100%;
+	height: 100%;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 /* Responsive Styles */
 @media (max-width: 992px) {
-    .footer {
-        padding: 2.5rem 0 1.5rem;
-    }
+	.footer {
+		padding: 2.5rem 0 1.5rem;
+	}
 
-    .footer h5 {
-        font-size: 1.1rem;
-        margin-bottom: 1.25rem;
-    }
+	.footer h5 {
+		font-size: 1.1rem;
+		margin-bottom: 1.25rem;
+	}
 }
 
 @media (max-width: 768px) {
-    .footer {
-        padding: 2rem 0 1rem;
-    }
+	.footer {
+		padding: 2rem 0 1rem;
+	}
 
-    .footer .row>div {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
+	.footer .row > div {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
 
-    .footer .social-links {
-        justify-content: center;
-    }
+	.footer .social-links {
+		justify-content: center;
+	}
 
-    .footer .list-unstyled li {
-        justify-content: center;
-    }
+	.footer .list-unstyled li {
+		justify-content: center;
+	}
 
-    .footer h5 {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-    }
+	.footer h5 {
+		font-size: 1rem;
+		margin-bottom: 1rem;
+	}
 
-    .footer hr {
-        margin: 1.5rem 0;
-    }
+	.footer hr {
+		margin: 1.5rem 0;
+	}
 }
 
 @media (max-width: 576px) {
-    .footer {
-        padding: 1.5rem 0 1rem;
-    }
+	.footer {
+		padding: 1.5rem 0 1rem;
+	}
 
-    .footer .container {
-        padding: 0 1.25rem;
-    }
+	.footer .container {
+		padding: 0 1.25rem;
+	}
 
-    .footer .social-links {
-        gap: 1.25rem;
-    }
+	.footer .social-links {
+		gap: 1.25rem;
+	}
 
-    .footer .social-links a {
-        font-size: 1.25rem;
-    }
+	.footer .social-links a {
+		font-size: 1.25rem;
+	}
 
-    .footer .list-unstyled li {
-        font-size: 0.9rem;
-        margin-bottom: 0.75rem;
-    }
+	.footer .list-unstyled li {
+		font-size: 0.9rem;
+		margin-bottom: 0.75rem;
+	}
 
-    .footer .row>div:last-child {
-        margin-bottom: 0;
-    }
+	.footer .row > div:last-child {
+		margin-bottom: 0;
+	}
 }
 
 /* Make footer sticky for all screen sizes */
 html {
-    height: 100%;
+	height: 100%;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 /* Dark Mode Adjustments */
 @media (prefers-color-scheme: dark) {
-    .footer {
-        background-color: var(--bg-secondary);
-        border-top: 1px solid var(--border-color);
-    }
+	.footer {
+		background-color: var(--bg-secondary);
+		border-top: 1px solid var(--border-color);
+	}
 }

@@ -1,39 +1,39 @@
 .alert-container {
-    max-width: 400px;
-    min-width: 300px;
+	max-width: 400px;
+	min-width: 300px;
 }
 
 .alert-wrapper {
-    animation: slideIn 0.3s ease-in-out;
+	animation: slideIn 0.3s ease-in-out;
 }
 
 .custom-alert {
-    border: none;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+	border: none;
+	border-radius: 10px;
+	padding: 1rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	margin-bottom: 0.5rem;
+	font-size: 0.95rem;
 }
 
 .alert-content {
-    flex: 1;
-    margin-right: 0.5rem;
-    line-height: 1.4;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    hyphens: auto;
-    max-width: 280px;
+	flex: 1;
+	margin-right: 0.5rem;
+	line-height: 1.4;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	hyphens: auto;
+	max-width: 280px;
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
 
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
 }
