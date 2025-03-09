@@ -1,52 +1,110 @@
 {% extends "auctions/layout.html" %}
+{% load auctions_filters %}
 
 {% block body %}
     {% include "auctions/components/alert.html" %}
     
-    <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col">
-                <h2 class="display-4 text-primary">
-                    <i class="fas fa-gavel me-2"></i>Active Listings
+    <div class="container py-4 py-lg-5">
+        <div class="row align-items-center g-3 g-md-4 mb-4">
+            <div class="col-12 col-md">
+                <h2 class="display-5 display-md-4 fw-bold">
+                    <i class="fas fa-gavel me-2 text-primary"></i>Active Listings
                 </h2>
-                <p class="lead text-muted">Discover amazing items up for auction</p>
+                <p class="lead text-muted mb-0">Discover amazing items up for auction</p>
             </div>
             {% if user.is_authenticated %}
-            <div class="col-auto">
-                <a href="{% url 'addAuctions' %}" class="btn btn-primary btn-lg">
+            <div class="col-12 col-md-auto mt-2 mt-md-0">
+                <a href="{% url 'addAuctions' %}" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center justify-content-md-start">
                     <i class="fas fa-plus-circle me-2"></i>Create New Auction
                 </a>
             </div>
             {% endif %}
         </div>
 
+        <!-- Filter options -->
+        <div class="card mb-4 border-0 shadow-sm bg-body-tertiary">
+            <div class="card-body p-3 p-md-4">
+                <form class="row g-3 align-items-end">
+                    <div class="col-12 col-md-4">
+                        <label for="categoryFilter" class="form-label small mb-1">
+                            <i class="fas fa-tag me-1"></i>Category
+                        </label>
+                        <select id="categoryFilter" class="form-select">
+                            <option value="" selected>All Categories</option>
+                            <!-- Add your categories dynamically here -->
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="sortBy" class="form-label small mb-1">
+                            <i class="fas fa-sort me-1"></i>Sort By
+                        </label>
+                        <select id="sortBy" class="form-select">
+                            <option value="newest" selected>Newest First</option>
+                            <option value="ending_soon">Ending Soon</option>
+                            <option value="price_low">Price: Low to High</option>
+                            <option value="price_high">Price: High to Low</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4 d-grid d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-filter me-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         {% if listings %}
-            <div class="row row-cols-1 row-cols-md-2 g-4">
+            <!-- Active listings -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 g-md-4">
                 {% for auction in listings %}
-                    <div class="col">
+                    <div class="col mb-2 mb-md-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter|multiply:50 }}">
                         {% include "auctions/components/card.html" %}
                     </div>
                 {% endfor %}
             </div>
             
-            <div class="mt-5">
+            <!-- Pagination -->
+            <div class="mt-4 mt-lg-5">
                 {% include "auctions/components/pagination.html" %}
             </div>
         {% else %}
-            <div class="text-center py-5">
-                <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
-                <p class="h4 text-muted">No active listings at the moment.</p>
-                <p class="text-muted">Be the first to create an auction!</p>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'addAuctions' %}" class="btn btn-primary mt-3">
-                        <i class="fas fa-plus-circle me-2"></i>Create New Auction
-                    </a>
-                {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-primary mt-3">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login to Create Auction
-                    </a>
-                {% endif %}
+            <!-- Empty state with responsive design -->
+            <div class="card border-0 shadow-sm bg-body-tertiary">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-box-open fa-4x text-muted opacity-50 mb-3"></i>
+                    <h3 class="h4 fw-bold text-muted">No active listings at the moment</h3>
+                    <p class="text-muted mb-4">Be the first to create an auction and start earning!</p>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'addAuctions' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-plus-circle me-2"></i>Create New Auction
+                        </a>
+                    {% else %}
+                        <div class="d-grid gap-2 col-lg-6 mx-auto">
+                            <a href="{% url 'login' %}" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login to Create Auction
+                            </a>
+                            <a href="{% url 'register' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-user-plus me-2"></i>Register for an Account
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
+        {% endif %}
+        
+        <!-- Recently viewed items (only shows if user has viewed items) -->
+        {% if recently_viewed_items %}
+        <div class="mt-5">
+            <h3 class="h4 mb-3"><i class="fas fa-history me-2 text-primary"></i>Recently Viewed</h3>
+            <div class="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-3">
+                {% for item in recently_viewed_items %}
+                    <div class="col">
+                        {% include "auctions/components/mini_card.html" with auction=item %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
         {% endif %}
     </div>
 {% endblock %}
