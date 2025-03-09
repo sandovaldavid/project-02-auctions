@@ -10,7 +10,7 @@
                 <h2 class="display-5 display-md-4 fw-bold">
                     <i class="fas fa-gavel me-2 text-primary"></i>Active Listings
                 </h2>
-                <p class="lead text-muted mb-0">Discover amazing items up for auction</p>
+                <p class="lead mb-0">Discover amazing items up for auction</p>
             </div>
             {% if user.is_authenticated %}
             <div class="col-12 col-md-auto mt-2 mt-md-0">
@@ -74,9 +74,9 @@
             <!-- Empty state with responsive design -->
             <div class="card border-0 shadow-sm bg-body-tertiary">
                 <div class="card-body text-center py-5">
-                    <i class="fas fa-box-open fa-4x text-muted opacity-50 mb-3"></i>
-                    <h3 class="h4 fw-bold text-muted">No active listings at the moment</h3>
-                    <p class="text-muted mb-4">Be the first to create an auction and start earning!</p>
+                    <i class="fas fa-box-open fa-4x opacity-50 mb-3"></i>
+                    <h3 class="h4 fw-bold">No active listings at the moment</h3>
+                    <p class=" mb-4">Be the first to create an auction and start earning!</p>
                     {% if user.is_authenticated %}
                         <a href="{% url 'addAuctions' %}" class="btn btn-primary btn-lg">
                             <i class="fas fa-plus-circle me-2"></i>Create New Auction
