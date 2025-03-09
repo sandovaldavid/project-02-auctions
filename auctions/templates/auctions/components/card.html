@@ -1,7 +1,7 @@
 <div class="card auction-card h-100 border-0">
     {% if auction %}
         <!-- Special badges section - positioned absolutely -->
-        <div class="card-badges position-absolute top-0 start-0 m-3 d-flex flex-column gap-2">
+        <div class="card-badges position-absolute top-0 start-0 m-3 d-flex flex-column gap-2 z-1">
             {% if auction.is_new %}
                 <span class="badge rounded-pill bg-primary">
                     <i class="fas fa-star me-1"></i>New
@@ -21,7 +21,7 @@
         
         {% if remove_url %}
             <button onclick="if(confirm('Remove from watchlist?')) window.location.href='{{ remove_url }}'" 
-                    class="btn-close position-absolute top-0 end-0 m-3 bg-light rounded-circle p-2" 
+                    class="btn-close position-absolute top-0 end-0 m-3 bg-light rounded-circle p-2 z-1" 
                     type="button"
                     aria-label="Remove from watchlist">
             </button>
@@ -29,15 +29,14 @@
         
         <div class="row g-0 h-100">
             <div class="col-md-4">
-                <div class="image-container h-100 position-relative overflow-hidden">
+                <div class="image-container position-relative overflow-hidden">
                     {% if auction.image %}
                         <img src="{{ auction.image }}" 
-                            class="img-fluid auction-image w-100 h-100" 
+                            class="img-fluid auction-image" 
                             alt="Image of {{ auction.title }}"
-                            loading="lazy"
-                            style="object-fit: cover;">
+                            loading="lazy">
                     {% else %}
-                        <div class="no-image-placeholder d-flex align-items-center justify-content-center h-100 bg-light">
+                        <div class="no-image-placeholder d-flex align-items-center justify-content-center h-100 w-100 bg-light">
                             <i class="fas fa-image fa-3x opacity-50"></i>
                         </div>
                     {% endif %}
