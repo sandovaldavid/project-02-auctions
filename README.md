@@ -19,11 +19,11 @@ Auction Site is a comprehensive web application that enables users to participat
 
 ### Desktop View
 
-![Desktop View](/assets/desktop-edmo.png)
+![Desktop View](/static//desktop-edmo.png)
 
 ### Mobile View
 
-![Mobile View](/assets/mobile-demo.png)
+![Mobile View](/static/mobile-demo.png)
 
 ## 🚀 Features
 
