@@ -1,41 +1,46 @@
 {% extends "auctions/layout.html" %}
+{% load auctions_filters %}
 
-{% block title %}Categories{% endblock %}
+{% block title %}Categories - Browse by Interest{% endblock %}
 {% block body %}
-<div class="categories-container py-5">
+<div class="categories-container py-4 py-md-5">
     <div class="container">
         <!-- Header Section -->
         <div class="row justify-content-center">
-            <div class="col-md-8 text-center mb-5">
-                <h2 class="display-4">
+            <div class="col-lg-8 text-center mb-4 mb-md-5">
+                <h1 class="display-4 fw-bold">
                     <i class="fas fa-tags text-gradient me-2"></i>Categories
-                </h2>
-                <p class="lead">Discover amazing items by category</p>
+                </h1>
+                <p class="lead">Find exactly what you're looking for by category</p>
             </div>
         </div>
 
         <!-- Category Cards Grid -->
-        <div class="category-grid mb-5">
+        <div class="category-grid">
             {% for value, display in category_choices %}
-            <div class="category-card {% if value == selected_category %}active{% endif %}">
+            <div class="category-card {% if value == selected_category %}active{% endif %}" data-category="{{ value }}">
                 <a href="?category={{ value }}" class="category-link">
-                    <div class="category-icon">
-                        {% if value == 'Fashion' %}
-                            <i class="fas fa-tshirt"></i>
-                        {% elif value == 'Electronics' %}
-                            <i class="fas fa-laptop"></i>
-                        {% elif value == 'Home' %}
-                            <i class="fas fa-home"></i>
-                        {% elif value == 'Books' %}
-                            <i class="fas fa-book"></i>
-                        {% elif value == 'Toys' %}
-                            <i class="fas fa-gamepad"></i>
-                        {% else %}
-                            <i class="fas fa-box"></i>
-                        {% endif %}
+                    <div class="category-icon-wrapper">
+                        <div class="category-icon">
+                            {% if value == 'Fashion' %}
+                                <i class="fas fa-tshirt"></i>
+                            {% elif value == 'Electronics' %}
+                                <i class="fas fa-laptop"></i>
+                            {% elif value == 'Home' %}
+                                <i class="fas fa-home"></i>
+                            {% elif value == 'Books' %}
+                                <i class="fas fa-book"></i>
+                            {% elif value == 'Toys' %}
+                                <i class="fas fa-gamepad"></i>
+                            {% else %}
+                                <i class="fas fa-box"></i>
+                            {% endif %}
+                        </div>
                     </div>
                     <h3 class="category-title">{{ display }}</h3>
-                    <span class="category-items">Browse Items</span>
+                    <span class="category-items">
+                        <i class="fas fa-arrow-right me-1"></i>Browse Items
+                    </span>
                 </a>
             </div>
             {% endfor %}
@@ -44,11 +49,11 @@
         <!-- Results Section -->
         <div class="results-section">
             {% if selected_category %}
-            <div class="results-header mb-4">
-                <h3 class="results-title">
+            <div class="results-header">
+                <h2 class="results-title">
                     <i class="fas fa-list me-2"></i>
-                    Items in {{ selected_category }}
-                </h3>
+                    {{ selected_category }} Items
+                </h2>
                 <a href="{% url 'categories' %}" class="btn btn-outline-secondary">
                     <i class="fas fa-times me-2"></i>Clear Filter
                 </a>
@@ -58,7 +63,7 @@
             {% if listings %}
             <div class="listings-grid">
                 {% for auction in listings %}
-                <div class="listing-item">
+                <div class="listing-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|multiply:50 }}">
                     {% include "auctions/components/card.html" with auction=auction %}
                 </div>
                 {% endfor %}
@@ -71,8 +76,8 @@
                     <p>{{ selected_category|default:"No" }} items are currently available</p>
                     {% if user.is_authenticated %}
                     <div class="empty-actions">
-                        <a href="{% url 'addAuctions' %}" class="btn btn-primary">
-                            <i class="fas fa-plus-circle me-2"></i>Create New Auction
+                        <a href="{% url 'addAuctions' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-plus-circle"></i>Create New Auction
                         </a>
                     </div>
                     {% endif %}
@@ -83,7 +88,7 @@
 
         <!-- Pagination -->
         {% if listings %}
-        <div class="mt-5">
+        <div class="mt-4 mt-md-5">
             {% include "auctions/components/pagination.html" %}
         </div>
         {% endif %}
