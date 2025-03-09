@@ -35,6 +35,7 @@
 .auction-image-container {
 	position: relative;
 	overflow: hidden;
+	align-content: center;
 }
 
 .auction-detail-image {
