@@ -1,34 +1,30 @@
-<div
-    class="alert-container position-fixed top-0 end-0 p-3"
-    style="z-index: 1050"
->
-    {% if messages %} {% for message in messages %}
-    <div class="alert-wrapper mb-2">
-        <div
-            class="alert custom-alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} d-flex align-items-center fade show"
-            role="alert"
-        >
-            <div class="alert-icon me-3">
-                <svg
-                    class="bi flex-shrink-0"
-                    width="24"
-                    height="24"
-                    role="img"
-                    aria-label="{{ message.tags|title }}:"
-                >
-                    <use
-                        xlink:href="{% if message.tags == 'error' %}#exclamation-triangle-fill{% elif message.tags == 'success' %}#check-circle-fill{% else %}#info-fill{% endif %}"
-                    />
-                </svg>
-            </div>
-            <div class="alert-content">{{ message }}</div>
-            <button
-                type="button"
-                class="btn-close ms-3"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-            ></button>
-        </div>
-    </div>
-    {% endfor %} {% endif %}
+<div class="alert-container position-fixed p-3" style="z-index: 1050">
+	{% if messages %} {% for message in messages %}
+	<div
+		class="alert-wrapper mb-2"
+		role="alert"
+		aria-live="assertive"
+		aria-atomic="true">
+		<div
+			class="alert custom-alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} d-flex align-items-center fade show">
+			<div class="alert-icon">
+				{% if message.tags == 'error' or message.tags == 'danger' %}
+				<i class="fas fa-exclamation-circle"></i>
+				{% elif message.tags == 'success' %}
+				<i class="fas fa-check-circle"></i>
+				{% elif message.tags == 'warning' %}
+				<i class="fas fa-exclamation-triangle"></i>
+				{% else %}
+				<i class="fas fa-info-circle"></i>
+				{% endif %}
+			</div>
+			<div class="alert-content">{{ message }}</div>
+			<button
+				type="button"
+				class="btn-close"
+				data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+	</div>
+	{% endfor %} {% endif %}
 </div>
