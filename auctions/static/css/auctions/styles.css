@@ -130,20 +130,6 @@ body {
 	margin-left: auto;
 }
 
-.price-tag {
-	font-weight: 700;
-	color: var(--price-color);
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-}
-
-.price-tag::before {
-	content: '$';
-	font-size: 0.8em;
-	color: var(--price-icon);
-}
-
 .bid-now-btn {
 	background: var(--bid-color);
 	color: white;
@@ -357,10 +343,6 @@ body {
 		font-size: 1.75rem;
 	}
 
-	.card {
-		margin-bottom: 1rem;
-	}
-
 	.row {
 		margin-right: -5px;
 		margin-left: -5px;
@@ -401,20 +383,12 @@ body {
 		padding-top: 0.5rem !important;
 		padding-bottom: 0.5rem !important;
 	}
-
-	.card {
-		margin-bottom: 0.5rem;
-	}
 }
 
 /* Dark Mode Adjustments */
 @media (max-width: 768px) {
 	[data-theme='dark'] .container {
 		background: var(--bg-main);
-	}
-
-	[data-theme='dark'] .card {
-		background: var(--bg-secondary);
 	}
 }
 
