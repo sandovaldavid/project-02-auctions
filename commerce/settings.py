@@ -78,6 +78,7 @@ WSGI_APPLICATION = "commerce.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# Default to SQLite for local development
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -85,10 +86,16 @@ DATABASES = {
     }
 }
 
-# Reemplazar la configuración de la base de datos con la de Vercel si está disponible
-if "DATABASE_URL" in os.environ:
-    DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
+# Use PostgreSQL if DATABASE_URL is provided
+if os.getenv("DATABASE_URL") and not DEBUG:
+    DATABASES["default"] = dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
+    print("Using PostgreSQL database")
+else:
+    print("Using SQLite database")
 
 AUTH_USER_MODEL = "auctions.User"
 
@@ -131,7 +138,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "/login"  # Cambia la ruta según tu configuración
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "auctions/static"),
+]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
