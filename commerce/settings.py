@@ -89,9 +89,7 @@ DATABASES = {
 # Use PostgreSQL if DATABASE_URL is provided
 if os.getenv("DATABASE_URL") and not DEBUG:
     DATABASES["default"] = dj_database_url.config(
-        default=os.getenv("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
+        default=os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=True
     )
     print("Using PostgreSQL database")
 else:
