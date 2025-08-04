@@ -22,7 +22,6 @@ def index(request):
 
 def login_view(request):
     if request.method == "POST":
-
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
@@ -37,8 +36,7 @@ def login_view(request):
             "auctions/login.html",
             {"message": "Invalid username and/or password."},
         )
-    else:
-        return render(request, "auctions/login.html")
+    return render(request, "auctions/login.html")
 
 
 def logout_view(request):
@@ -71,8 +69,7 @@ def register(request):
             )
         login(request, user)
         return HttpResponseRedirect(reverse("index"))
-    else:
-        return render(request, "auctions/register.html")
+    return render(request, "auctions/register.html")
 
 
 @login_required
@@ -93,8 +90,7 @@ def new_auctions(request):
             "auctions/newAuctions.html",
             {"form": form, "category_choices": category_choices},
         )
-    else:
-        form = ListingForm()
+    form = ListingForm()
     return render(
         request,
         "auctions/newAuctions.html",
@@ -156,14 +152,13 @@ def watchlist(request, listing_id):
         current_listing = Listing.objects.get(pk=listing_id)
         Watchlist.objects.create(user=user, listing=current_listing, active=True)
         return HttpResponseRedirect(reverse("watchlist", args=[user.id]))
-    else:
-        listings_in_watchlist = Listing.objects.filter(
-            watchlist__user=user, watchlist__active=True
-        ).order_by("-created")
-        paginator = Paginator(listings_in_watchlist, 10)
-        page_number = request.GET.get("page")
-        page_listings = paginator.get_page(page_number)
-        return render(request, "auctions/watchList.html", {"listings": page_listings})
+    listings_in_watchlist = Listing.objects.filter(
+        watchlist__user=user, watchlist__active=True
+    ).order_by("-created")
+    paginator = Paginator(listings_in_watchlist, 10)
+    page_number = request.GET.get("page")
+    page_listings = paginator.get_page(page_number)
+    return render(request, "auctions/watchList.html", {"listings": page_listings})
 
 
 def watchlist_remove(request, listing_id):
