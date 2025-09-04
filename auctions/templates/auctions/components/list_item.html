@@ -1,0 +1,171 @@
+{% load auctions_filters %}
+
+<div class="card border-0 shadow-sm listing-list-item">
+    <div class="card-body p-3">
+        <div class="row align-items-center g-3">
+            <!-- Image -->
+            <div class="col-auto">
+                <div class="listing-image-container">
+                    {% if auction.image %}
+                        <img src="{{ auction.image }}" 
+                             alt="{{ auction.title }}" 
+                             class="listing-image rounded"
+                             onerror="this.src='/static/auctions/images/placeholder.jpg'">
+                    {% else %}
+                        <div class="listing-placeholder rounded d-flex align-items-center justify-content-center">
+                            <i class="fas fa-image fa-2x text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="col">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-8">
+                        <!-- Title and Category -->
+                        <div class="mb-2">
+                            <h5 class="card-title mb-1">
+                                <a href="{% url 'listing' auction.id %}" class="text-decoration-none text-dark fw-bold">
+                                    {{ auction.title|truncatechars:60 }}
+                                </a>
+                            </h5>
+                            {% if auction.category %}
+                                <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25">
+                                    <i class="fas fa-tag me-1"></i>{{ auction.category }}
+                                </span>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Description -->
+                        <p class="card-text text-muted mb-2">
+                            {{ auction.description|truncatechars:120 }}
+                        </p>
+                        
+                        <!-- Meta Info -->
+                        <div class="listing-meta d-flex flex-wrap gap-3 text-muted small">
+                            <span>
+                                <i class="fas fa-user me-1"></i>
+                                {{ auction.user.username }}
+                            </span>
+                            <span>
+                                <i class="fas fa-clock me-1"></i>
+                                {{ auction.created|timesince }} ago
+                            </span>
+                            {% if auction.bids.count > 0 %}
+                                <span>
+                                    <i class="fas fa-gavel me-1"></i>
+                                    {{ auction.bids.count }} bid{{ auction.bids.count|pluralize }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Price and Actions -->
+                    <div class="col-12 col-md-4">
+                        <div class="text-md-end">
+                            <!-- Price -->
+                            <div class="price-section mb-3">
+                                {% if auction.current_bid %}
+                                    <div class="current-bid">
+                                        <span class="text-muted small">Current bid</span>
+                                        <div class="h4 fw-bold text-success mb-0">
+                                            ${{ auction.current_bid|floatformat:2 }}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="starting-bid">
+                                        <span class="text-muted small">Starting bid</span>
+                                        <div class="h4 fw-bold text-primary mb-0">
+                                            ${{ auction.starting_bid|floatformat:2 }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="listing-actions d-flex flex-column flex-md-row gap-2">
+                                <a href="{% url 'listing' auction.id %}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye me-1"></i>
+                                    View Details
+                                </a>
+                                
+                                {% if user.is_authenticated %}
+                                    {% load auctions_filters %}
+                                    {% if auction|is_in_watchlist:user %}
+                                        <form method="post" action="{% url 'watchlist_remove' auction.id %}" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-danger btn-sm" title="Remove from watchlist">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form method="post" action="{% url 'watchlist' auction.id %}" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-secondary btn-sm" title="Add to watchlist">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.listing-list-item {
+    transition: all 0.2s ease;
+}
+
+.listing-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.listing-image-container {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.listing-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.listing-placeholder {
+    width: 80px;
+    height: 80px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.listing-meta span {
+    white-space: nowrap;
+}
+
+.price-section {
+    min-width: 120px;
+}
+
+@media (max-width: 767.98px) {
+    .listing-actions {
+        flex-direction: row !important;
+    }
+    
+    .listing-meta {
+        font-size: 0.8rem;
+    }
+    
+    .price-section {
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+    }
+}
+</style>
