@@ -71,22 +71,33 @@
                         <div class="d-flex justify-content-between align-items-start mb-4">
                             <h1 class="auction-title">{{ listing.title }}</h1>
                             {% if user.is_authenticated %}
+                                {% load auctions_filters %}
                                 <div class="auction-actions">
-                                    <form action="{% url 'watchlist' listing.id %}" method="post" class="d-inline">
-                                        {% csrf_token %}
-                                        <button type="submit" 
-                                                class="btn btn-outline-heart {% if listing in user.watchlist.all %}active{% endif %}"
-                                                title="{% if listing in user.watchlist.all %}Remove from Watchlist{% else %}Add to Watchlist{% endif %}">
-                                            <i class="fas fa-heart"></i>
-                                            <span class="watchlist-text">
-                                                {% if listing in user.watchlist.all %}
+                                    {% if listing|is_in_watchlist:user %}
+                                        <form action="{% url 'watchlist_remove' listing.id %}" method="post" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" 
+                                                    class="btn btn-outline-heart active"
+                                                    title="Remove from Watchlist">
+                                                <i class="fas fa-heart"></i>
+                                                <span class="watchlist-text">
                                                     In Watchlist
-                                                {% else %}
+                                                </span>
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form action="{% url 'watchlist' listing.id %}" method="post" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" 
+                                                    class="btn btn-outline-heart"
+                                                    title="Add to Watchlist">
+                                                <i class="fas fa-heart"></i>
+                                                <span class="watchlist-text">
                                                     Add to Watchlist
-                                                {% endif %}
-                                            </span>
-                                        </button>
-                                    </form>
+                                                </span>
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         </div>
