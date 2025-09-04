@@ -43,6 +43,8 @@
         <link href="{% static 'css/auctions/newAuctions/styles.css' %}" rel="stylesheet" />
         {% elif request.resolver_match.url_name == 'watchlist' %}
         <link href="{% static 'css/auctions/watchlist/styles.css' %}" rel="stylesheet" />
+        {% elif request.resolver_match.url_name == 'search' %}
+        <link href="{% static 'css/auctions/search/styles.css' %}" rel="stylesheet" />
         {% endif %}
         
         <link href="{% static 'css/auctions/auctions/styles.css' %}" rel="stylesheet" />
@@ -57,9 +59,6 @@
         </noscript>
     </head>
     <body>
-        <!-- Skip to main content link for accessibility -->
-        <a href="#main-content" class="visually-hidden-focusable skip-link">Skip to main content</a>
-        
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg sticky-top flex-nowrap" aria-label="Main navigation">
             <!-- Theme Toggle -->
@@ -104,6 +103,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link px-2 {% if request.resolver_match.url_name == 'search' %}active text-light{% endif %}" 
+                               href="{% url 'search' %}">
+                                <i class="fas fa-search me-1" aria-hidden="true"></i> 
+                                <span>Search</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link px-2 {% if request.resolver_match.url_name == 'addAuctions' %}active text-light{% endif %}" 
                                href="{% url 'addAuctions' %}">
                                 <i class="fas fa-plus-circle me-1" aria-hidden="true"></i> 
@@ -112,8 +118,8 @@
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link px-2 {% if request.resolver_match.url_name == 'watchlist' %}active text-light{% endif %}" 
-                               href="{% url 'watchlist' user.id %}">
+                            <a class="nav-link px-2 {% if request.resolver_match.url_name == 'my_watchlist' %}active text-light{% endif %}" 
+                               href="{% url 'my_watchlist' %}">
                                 <i class="fas fa-heart me-1" aria-hidden="true"></i> 
                                 <span>Watchlist</span>
                                 {% if watchlist_count > 0 %}
@@ -122,11 +128,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-2" href="{% url 'logout' %}">
-                                <i class="fas fa-sign-out-alt me-1" aria-hidden="true"></i> 
-                                <span>Logout</span>
+                            <a class="nav-link px-2 {% if request.resolver_match.url_name == 'notifications' %}active text-light{% endif %}" 
+                               href="{% url 'notifications' %}">
+                                <i class="fas fa-bell me-1" aria-hidden="true"></i> 
+                                <span>Notifications</span>
+                                <span id="notification-badge" class="badge bg-danger" style="display: none;"></span>
                             </a>
                         </li>
+
                         {% else %}
                         <li class="nav-item">
                             <a class="nav-link px-2 {% if request.resolver_match.url_name == 'login' %}active text-light{% endif %}" 
@@ -145,9 +154,32 @@
                         {% endif %}
                     </ul>
                     {% if user.is_authenticated %}
-                    <div class="user-info">
-                        <i class="fas fa-user me-1" aria-hidden="true"></i>
-                        <strong>{{ user.username }}</strong>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2" aria-hidden="true"></i>
+                            <strong>{{ user.username }}</strong>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'profile' %}">
+                                    <i class="fas fa-user-circle me-2" aria-hidden="true"></i>
+                                    Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'dashboard' %}">
+                                    <i class="fas fa-chart-bar me-2" aria-hidden="true"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fas fa-sign-out-alt me-2" aria-hidden="true"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                     {% endif %}
                 </div>
@@ -221,5 +253,13 @@
                 }
             });
         </script>
+        
+        <!-- Alert Auto-Dismiss JavaScript -->
+        <script src="{% static 'js/alert.js' %}"></script>
+        
+        <!-- Page Specific JavaScript -->
+        {% if request.resolver_match.url_name == 'search' %}
+        <script src="{% static 'js/search.js' %}"></script>
+        {% endif %}
     </body>
 </html>
