@@ -31,8 +31,6 @@ class ListingForm(forms.ModelForm):
         title = self.cleaned_data.get("title")
         if title == "":
             raise forms.ValidationError("Title cannot be empty.")
-        if Listing.objects.filter(title=title).exists():
-            raise forms.ValidationError("This title is already taken.")
         return title
 
     def clean_description(self):
@@ -68,7 +66,6 @@ class BidForm(forms.ModelForm):
 
     def clean_amount(self):
         bid_value = self.cleaned_data.get("amount")
-        print(bid_value)
         if bid_value is None:
             raise forms.ValidationError("The bid value cannot be empty.")
         if bid_value <= 0:
