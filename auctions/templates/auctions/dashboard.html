@@ -1,0 +1,427 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% load auctions_filters %}
+
+{% block title %}Dashboard - Inteligencia de Negocio{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/auctions/dashboard/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid dashboard-container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4 dashboard-header">
+                <h1 class="h2 mb-0">
+                    <i class="fas fa-chart-bar me-2 text-primary"></i>
+                    Dashboard de Inteligencia de Negocio
+                </h1>
+                <div class="text-muted">
+                    <i class="fas fa-clock me-1"></i>
+                    Actualizado: {% now "d/m/Y H:i" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPI Cards Row -->
+    <div class="row mb-4">
+        <!-- Total Listings -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2 kpi-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total de Subastas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_listings }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-gavel fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Listings -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2 kpi-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Subastas Activas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ active_listings }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-play-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Users -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2 kpi-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Total de Usuarios
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_users }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Bids -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2 kpi-card">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total de Pujas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_bids }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-hand-paper fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial KPIs Row -->
+    <div class="row mb-4">
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-dollar-sign me-2"></i>
+                        KPIs Financieros
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Valor Total de Pujas
+                                </div>
+                                <div class="h4 mb-0 font-weight-bold text-success">
+                                    ${{ total_bid_amount|floatformat:2 }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Puja Promedio
+                                </div>
+                                <div class="h4 mb-0 font-weight-bold text-info">
+                                    ${{ avg_bid_amount|floatformat:2 }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-user me-2"></i>
+                        Mis KPIs
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Mis Subastas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ user_total_listings }}</div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Activas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ user_active_listings }}</div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Mis Pujas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ user_bids }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row">
+        <!-- Category Distribution Chart -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-chart-pie me-2"></i>
+                        Distribución por Categorías
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Trends Chart -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Tendencias Mensuales
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables Row -->
+    <div class="row">
+        <!-- Top Bidders -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-trophy me-2"></i>
+                        Top Pujadores
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Pujas</th>
+                                    <th>Total ($)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for bidder in top_bidders %}
+                                <tr>
+                                    <td>{{ bidder.username }}</td>
+                                    <td>{{ bidder.bid_count }}</td>
+                                    <td>${{ bidder.total_bid_amount|floatformat:2 }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">No hay datos disponibles</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Bids -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-fire me-2"></i>
+                        Subastas Más Populares
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Pujas</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for listing in popular_listings %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'listing' listing.id %}" class="text-decoration-none">
+                                            {{ listing.title|truncatechars:30 }}
+                                        </a>
+                                    </td>
+                                    <td>{{ listing.bid_count }}</td>
+                                    <td>
+                                        {% if listing.active %}
+                                            <span class="badge bg-success">Activa</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Cerrada</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">No hay datos disponibles</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow mb-4 dashboard-card">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-clock me-2"></i>
+                        Actividad Reciente
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="font-weight-bold text-secondary">Últimas Subastas</h6>
+                            <div class="list-group list-group-flush">
+                                {% for listing in recent_listings %}
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <a href="{% url 'listing' listing.id %}" class="text-decoration-none">
+                                            {{ listing.title|truncatechars:40 }}
+                                        </a>
+                                        <br>
+                                        <small class="text-muted">{{ listing.created|timesince }} ago</small>
+                                    </div>
+                                    {% if listing.active %}
+                                        <span class="badge bg-success">Activa</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Cerrada</span>
+                                    {% endif %}
+                                </div>
+                                {% empty %}
+                                <div class="list-group-item text-center text-muted">
+                                    No hay subastas recientes
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="font-weight-bold text-secondary">Últimas Pujas</h6>
+                            <div class="list-group list-group-flush">
+                                {% for bid in recent_bids %}
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>{{ bid.user.username }}</strong> pujó en
+                                        <a href="{% url 'listing' bid.listing.id %}" class="text-decoration-none">
+                                            {{ bid.listing.title|truncatechars:25 }}
+                                        </a>
+                                        <br>
+                                        <small class="text-muted">{{ bid.created_at|timesince }} ago</small>
+                                    </div>
+                                    <span class="badge bg-primary">${{ bid.amount }}</span>
+                                </div>
+                                {% empty %}
+                                <div class="list-group-item text-center text-muted">
+                                    No hay pujas recientes
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Data containers for JavaScript -->
+    <div id="dashboard-data" 
+         data-category-stats="{{ category_stats|to_json }}" 
+         data-monthly-listings="{{ monthly_listings|to_json }}" 
+         data-monthly-bids="{{ monthly_bids|to_json }}" 
+         style="display: none;"></div>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+
+<style>
+.border-left-primary {
+    border-left: 0.25rem solid #4e73df !important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e !important;
+}
+
+.text-xs {
+    font-size: 0.7rem;
+}
+
+.shadow {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+.card {
+    border: none;
+}
+
+.text-gray-800 {
+    color: #5a5c69 !important;
+}
+
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+}
+</style>
+{% endblock %}
