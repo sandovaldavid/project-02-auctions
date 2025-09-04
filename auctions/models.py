@@ -9,7 +9,7 @@ class User(AbstractUser):
 
 
 class Listing(models.Model):
-    title = models.CharField(max_length=64, blank=True)
+    title = models.CharField(max_length=64, blank=True, unique=True)
     description = models.TextField(blank=True)
     starting_bid = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     current_bid = models.DecimalField(
@@ -46,9 +46,10 @@ class Listing(models.Model):
 
 
 class Bid(models.Model):
-    amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bids")
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="bids")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user} bid {self.amount} on {self.listing.title}"
@@ -72,6 +73,48 @@ class Watchlist(models.Model):
         Listing, on_delete=models.CASCADE, related_name="watchlist"
     )
     active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user} added {self.listing.title} to watchlist"
+        return f"{self.user.username} - {self.listing.title}"
+
+
+class Notification(models.Model):
+    NOTIFICATION_TYPES = [
+        ("bid", "New Bid"),
+        ("outbid", "Outbid"),
+        ("auction_ending", "Auction Ending"),
+        ("auction_ended", "Auction Ended"),
+    ]
+
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="notifications"
+    )
+    notification_type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES)
+    title = models.CharField(max_length=200)
+    message = models.TextField()
+    listing = models.ForeignKey(
+        Listing,
+        on_delete=models.CASCADE,
+        related_name="notifications",
+        null=True,
+        blank=True,
+    )
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user.username} - {self.title}"
+
+    def mark_as_read(self):
+        """Mark notification as read"""
+        self.is_read = True
+        self.save()
+
+    @classmethod
+    def get_unread_for_user(cls, user):
+        """Get all unread notifications for a user"""
+        return cls.objects.filter(user=user, is_read=False)
