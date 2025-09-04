@@ -1,0 +1,30 @@
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+# A regex preceded by ^/ will apply only to files and directories
+# in the root of the project.
+(
+  ^/migrations/     # exclude migrations
+  | ^/venv/         # exclude virtual environment
+  | ^/env/          # exclude virtual environment
+  | ^/.venv/        # exclude virtual environment
+)
+'''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = [
+    "E203",  # whitespace before ':'
+    "E501",  # line too long (handled by black)
+    "W503",  # line break before binary operator
+]
+exclude = [
+    "migrations",
+    "venv",
+    "env",
+    ".venv",
+    "__pycache__",
+    ".git",
+]
