@@ -1,0 +1,272 @@
+/* Profile Page Styles with Dark Mode Support */
+
+/* Light Mode Styles */
+.profile-container {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+.profile-header h1 {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.profile-header .text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* User Information Card */
+.user-info-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.user-info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.user-info-card .card-header {
+    background: var(--primary-color) !important;
+    color: var(--text-light) !important;
+    border-bottom: 1px solid var(--border-light);
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.user-info-card .card-body {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+.user-info-card .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.avatar-circle {
+    background: var(--primary-color) !important;
+    color: var(--text-light) !important;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Statistics Cards */
+.stats-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Gradient Cards - Light Mode */
+.bg-gradient-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark)) !important;
+    color: var(--text-light) !important;
+}
+
+.bg-gradient-success {
+    background: linear-gradient(45deg, #28a745, #1e7e34) !important;
+    color: var(--text-light) !important;
+}
+
+.bg-gradient-info {
+    background: linear-gradient(45deg, #17a2b8, #117a8b) !important;
+    color: var(--text-light) !important;
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(45deg, #ffc107, #e0a800) !important;
+    color: var(--text-dark) !important;
+}
+
+/* Card Text Colors */
+.stats-card .card-title {
+    color: inherit !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.stats-card h2 {
+    color: inherit !important;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.stats-card .-50 {
+    opacity: 0.7;
+}
+
+/* Watchlist Section */
+.watchlist-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+}
+
+.watchlist-section .card-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+}
+
+.watchlist-section .card-body {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+.watchlist-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.watchlist-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--primary-color);
+}
+
+.watchlist-item .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Dark Mode Specific Adjustments */
+[data-theme='dark'] .profile-container {
+    background: var(--bg-main);
+}
+
+[data-theme='dark'] .user-info-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .user-info-card .card-body {
+    background: var(--card-bg);
+}
+
+[data-theme='dark'] .stats-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+/* Dark mode gradient adjustments */
+[data-theme='dark'] .bg-gradient-primary {
+    background: linear-gradient(45deg, var(--primary-color), #1a4480) !important;
+}
+
+[data-theme='dark'] .bg-gradient-success {
+    background: linear-gradient(45deg, #198754, #0f5132) !important;
+}
+
+[data-theme='dark'] .bg-gradient-info {
+    background: linear-gradient(45deg, #0dcaf0, #055160) !important;
+}
+
+[data-theme='dark'] .bg-gradient-warning {
+    background: linear-gradient(45deg, #ffc107, #664d03) !important;
+    color: var(--text-dark) !important;
+}
+
+[data-theme='dark'] .watchlist-section {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .watchlist-section .card-header {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .watchlist-item {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .watchlist-item:hover {
+    border-color: var(--primary-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 1rem;
+    }
+    
+    .user-info-card,
+    .stats-card,
+    .watchlist-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .avatar-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .stats-card h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .stats-card .card-title {
+        font-size: 0.8rem;
+    }
+    
+    .stats-card h2 {
+        font-size: 1.75rem;
+    }
+    
+    .avatar-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-container > * {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.stats-card:nth-child(1) { animation-delay: 0.1s; }
+.stats-card:nth-child(2) { animation-delay: 0.2s; }
+.stats-card:nth-child(3) { animation-delay: 0.3s; }
+.stats-card:nth-child(4) { animation-delay: 0.4s; }

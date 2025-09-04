@@ -1,0 +1,326 @@
+/* Dashboard Page Styles with Dark Mode Support */
+
+/* Light Mode Styles */
+.dashboard-container {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+.dashboard-header h1 {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.dashboard-header .text-primary {
+    color: var(--primary-color) !important;
+}
+
+.dashboard-header .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* KPI Cards */
+.kpi-card {
+    background: var(--card-bg);
+    border: none;
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Border Left Colors */
+.border-left-primary {
+    border-left: 0.25rem solid var(--primary-color) !important;
+}
+
+.border-left-success {
+    border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-info {
+    border-left: 0.25rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+    border-left: 0.25rem solid #f6c23e !important;
+}
+
+/* Text Colors */
+.text-xs {
+    font-size: 0.7rem;
+}
+
+.text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-300 {
+    color: var(--text-secondary) !important;
+}
+
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+/* Card Headers */
+.dashboard-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.dashboard-card .card-header {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.dashboard-card .card-header h6 {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    width: 100%;
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* Tables */
+.dashboard-table {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+.dashboard-table thead th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-light);
+    font-weight: 600;
+}
+
+.dashboard-table tbody td {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border-color: var(--border-light);
+}
+
+.dashboard-table tbody tr:hover {
+    background: var(--bg-hover) !important;
+}
+
+.dashboard-table .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* List Groups */
+.dashboard-list-group {
+    background: var(--card-bg);
+}
+
+.dashboard-list-group .list-group-item {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border-color: var(--border-light);
+    transition: all 0.3s ease;
+}
+
+.dashboard-list-group .list-group-item:hover {
+    background: var(--bg-hover);
+    transform: translateX(5px);
+}
+
+.dashboard-list-group .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Badges */
+.badge.bg-success {
+    background-color: #198754 !important;
+}
+
+.badge.bg-secondary {
+    background-color: #6c757d !important;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Links */
+.dashboard-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.dashboard-link:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+/* Activity Section */
+.activity-section h6 {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Dark Mode Specific Adjustments */
+[data-theme='dark'] .dashboard-container {
+    background: var(--bg-main);
+}
+
+[data-theme='dark'] .kpi-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .dashboard-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .dashboard-card .card-header {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .chart-container {
+    background: var(--card-bg);
+}
+
+[data-theme='dark'] .dashboard-table thead th {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .dashboard-table tbody td {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .dashboard-list-group .list-group-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme='dark'] .border-left-primary {
+    border-left-color: var(--primary-light) !important;
+}
+
+[data-theme='dark'] .border-left-success {
+    border-left-color: #20c997 !important;
+}
+
+[data-theme='dark'] .border-left-info {
+    border-left-color: #0dcaf0 !important;
+}
+
+[data-theme='dark'] .border-left-warning {
+    border-left-color: #ffc107 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+    
+    .kpi-card,
+    .dashboard-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .chart-container {
+        height: 250px !important;
+    }
+    
+    .dashboard-table {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .text-xs {
+        font-size: 0.65rem;
+    }
+    
+    .kpi-card .h5 {
+        font-size: 1.5rem;
+    }
+    
+    .chart-container {
+        height: 200px !important;
+        padding: 0.5rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-container > * {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.kpi-card:nth-child(1) { animation-delay: 0.1s; }
+.kpi-card:nth-child(2) { animation-delay: 0.2s; }
+.kpi-card:nth-child(3) { animation-delay: 0.3s; }
+.kpi-card:nth-child(4) { animation-delay: 0.4s; }
+
+.dashboard-card:nth-child(1) { animation-delay: 0.5s; }
+.dashboard-card:nth-child(2) { animation-delay: 0.6s; }
+
+/* Shadow utility */
+.shadow {
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Custom scrollbar for tables */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}

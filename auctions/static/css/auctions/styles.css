@@ -8,9 +8,9 @@
 	--secondary-light: #fff0ed; /* Tono claro naranja */
 
 	/* Colores específicos para subastas */
-	--price-color: #16a34f; /* Verde brillante para precios */
-	--bid-color: #d97706; /* Naranja ámbar para pujas */
-	--timer-color: #c2410c; /* Naranja rojizo para temporizadores */
+	--price-color: #15803d; /* Verde más oscuro para mejor contraste */
+	--bid-color: #c2410c; /* Naranja más oscuro para pujas */
+	--timer-color: #b91c1c; /* Rojo más oscuro para temporizadores */
 	--premium-item: #854d0e; /* Ámbar oscuro para items destacados */
 
 	/* Background Colors - Light */
@@ -37,7 +37,7 @@
 
 	/* Status Colors - comunicación clara en subastas */
 	--success-color: #16a34f; /* Verde brillante */
-	--warning-color: #eab308; /* Amarillo ámbar */
+	--warning-color: #d97706; /* Amarillo ámbar más oscuro para mejor contraste */
 	--danger-color: #dc2626; /* Rojo vivo */
 	--info-color: #0284c7; /* Azul cielo */
 	--toggle-icon: #f59e0b; /* Ámbar */
@@ -63,6 +63,14 @@
 
 /* Dark Mode Colors - Contraste optimizado para subastas */
 [data-theme='dark'] {
+	/* Primary Colors - Dark */
+	--primary-color: #3b82f6; /* Azul más brillante para modo oscuro */
+	--primary-dark: #60a5fa; /* Azul más claro */
+	--primary-light: #1e293b; /* Azul oscuro para fondos */
+	--secondary-color: #f97316; /* Naranja más brillante */
+	--secondary-dark: #ea580c; /* Naranja oscuro */
+	--secondary-light: #1c1917; /* Tono oscuro naranja */
+
 	/* Background Colors - Dark */
 	--bg-main: rgba(22, 27, 34, 0.98); /* Azul-gris muy oscuro */
 	--bg-main-form: #374151; /* Gris oscuro */
@@ -78,12 +86,13 @@
 	--text-primary: #f8fafc; /* Blanco con tinte azul */
 	--text-secondary: #e2e8f0; /* Gris muy claro */
 	--text-muted: #cbd5e1; /* Gris claro medio */
+	--text-light: #ffffff; /* Blanco */
 	--price-color: #4ade80; /* Verde más brillante */
 	--price-icon: #34d399; /* Verde turquesa */
 
 	/* Colores específicos para subastas - modo oscuro */
 	--bid-color: #fb923c; /* Naranja más brillante */
-	--timer-color: #fb7185; /* Rojo rosado */
+	--timer-color: #f87171; /* Rojo más suave */
 	--premium-item: #fcd34d; /* Amarillo ámbar claro */
 
 	/* Border & Shadow - Dark */
@@ -98,16 +107,25 @@
 	/* Status Colors - Dark con mejor visibilidad */
 	--success-color: #22c55e; /* Verde más brillante */
 	--warning-color: #fbbf24; /* Amarillo más brillante */
-	--danger-color: #ef4444; /* Rojo más brillante */
-	--info-color: #38bdf8; /* Azul brillante */
-	--primary-dark: #60a5fa; /* Azul más claro */
+	--danger-color: #f87171; /* Rojo más suave pero visible */
+	--info-color: #60a5fa; /* Azul más brillante */
+	--toggle-icon: #fde68a; /* Amarillo pálido */
+
+	/* Badges y etiquetas específicas de subastas - Dark */
+	--badge-new: #60a5fa; /* Azul más brillante para items nuevos */
+	--badge-ending: #f87171; /* Rojo más suave para subastas por terminar */
+	--badge-popular: #a78bfa; /* Violeta más brillante para items populares */
+	--badge-premium: linear-gradient(
+		45deg,
+		#fbbf24,
+		#f59e0b
+	); /* Dorado para premium */
 
 	/* Gradientes mejorados para modo oscuro */
 	--gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
 	--gradient-secondary: linear-gradient(135deg, #f43f5e, #881337);
 	--bg-premium: linear-gradient(135deg, #fbbf24, #d97706);
 	--bg-timer: linear-gradient(135deg, #f87171, #dc2626);
-	--toggle-icon: #fde68a; /* Amarillo pálido */
 }
 
 /* Base Styles */
@@ -164,7 +182,8 @@ body {
 	padding: 0.25rem 0.75rem;
 	border-radius: 100px;
 	font-size: 0.8rem;
-	font-weight: 600;
+	font-weight: 700;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 	animation: pulse 2s infinite;
 }
 
@@ -174,7 +193,8 @@ body {
 	padding: 0.25rem 0.75rem;
 	border-radius: 100px;
 	font-size: 0.8rem;
-	font-weight: 600;
+	font-weight: 700;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Common Elements */
@@ -226,7 +246,8 @@ body {
 
 .alert-warning {
 	background: var(--warning-color);
-	color: var(--text-primary);
+	color: var(--text-light);
+	font-weight: 600;
 }
 
 .alert-danger {
