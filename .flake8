@@ -1,0 +1,16 @@
+[flake8]
+max-line-length = 88
+extend-ignore = 
+    E203,
+    E501,
+    W503
+exclude = 
+    migrations,
+    venv,
+    env,
+    .venv,
+    __pycache__,
+    .git,
+    .tox,
+    build,
+    dist
